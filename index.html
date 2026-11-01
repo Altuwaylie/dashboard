@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بيانات جدول الضرب</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --bg:#F5EFE6;
+  --card:#FBF7F0;
+  --accent:#C9A66B;
+  --brown:#6B4F2E;
+  --green:#4E7C4E;
+  --red:#A94442;
+  --gold:#B8860B;
+}
+* {
+  box-sizing:border-box;
+  font-family:"Segoe UI",Tahoma,sans-serif;
+}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--brown);
+}
+.header {
+  background:linear-gradient(135deg,var(--brown),var(--accent));
+  color:white;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:16px;
+}
+.header h1 {
+  font-size:24px;
+  margin:0;
+}
+.header-center { text-align:center; }
+.teacher-name {
+  justify-self:start;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:10px;
+  padding:8px 14px;
+  font-size:15px;
+  font-weight:700;
+}
+.header .btn { justify-self:end; }
+.week-info { font-size:13px; margin-top:6px; }
+
+.container {
+  width:100%;
+  max-width:1150px;
+  margin:auto;
+  padding:18px;
+}
+.btn {
+  border:1px solid var(--accent);
+  background:white;
+  color:var(--brown);
+  padding:8px 13px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+.actions {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+.section-title {
+  border-right:5px solid var(--accent);
+  padding-right:10px;
+  margin:22px 0 12px;
+  font-size:19px;
+  font-weight:800;
+}
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.card {
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:13px;
+  min-width:0;
+}
+.card h3 {
+  margin:0 0 10px;
+  font-size:15px;
+}
+.filters {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+select, .search-box {
+  border:1px solid var(--accent);
+  border-radius:9px;
+  padding:9px 12px;
+  color:var(--brown);
+  background:white;
+}
+.search-box {
+  width:100%;
+  font-size:14px;
+}
+
+.kpis {
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:9px;
+}
+.kpi {
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:13px;
+  padding:12px 7px;
+  text-align:center;
+}
+.kpi b {
+  display:block;
+  font-size:23px;
+}
+.kpi span { font-size:11px; }
+.click { cursor:pointer; }
+.green { color:var(--green); }
+.red { color:var(--red); }
+
+.grid2 {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+}
+.grid2 > * { min-width:0; }
+
+.chart-box {
+  position:relative;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  height:210px;
+  direction:ltr;
+}
+.chart-box canvas {
+  position:absolute !important;
+  inset:0 auto auto 0 !important;
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  margin:0 !important;
+  transform:none !important;
+}
+.line-box { height:205px; }
+.chart-print-image { display:none; }
+
+.belt {
+  overflow:hidden;
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:14px;
+  padding:17px 10px 10px;
+}
+.belt-inner {
+  display:flex;
+  gap:10px;
+  width:max-content;
+  max-width:none;
+}
+.pill {
+  position:relative;
+  background:white;
+  border:1px solid var(--accent);
+  border-radius:13px;
+  padding:11px 18px;
+  white-space:nowrap;
+  text-align:center;
+  flex-shrink:0;
+  cursor:pointer;
+}
+.pill-name {
+  font-size:14px;
+  font-weight:800;
+}
+.pill-grade {
+  font-size:11px;
+  margin-top:4px;
+  color:#88775f;
+}
+.top-pill {
+  border-color:var(--gold);
+  padding-inline:24px;
+}
+.trophy {
+  position:absolute;
+  right:-5px;
+  top:-15px;
+  font-size:24px;
+  transform:rotate(18deg);
+}
+.scard {
+  width:190px;
+  flex-shrink:0;
+  background:white;
+  border:1px solid var(--accent);
+  border-radius:14px;
+  padding:12px;
+  text-align:center;
+  cursor:pointer;
+}
+.ring {
+  width:76px;
+  height:76px;
+  margin:0 auto 8px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--accent) var(--p),#e8ddd0 0);
+}
+.ring span {
+  width:59px;
+  height:59px;
+  border-radius:50%;
+  background:var(--card);
+  display:grid;
+  place-items:center;
+  font-weight:800;
+}
+.smeta {
+  font-size:11px;
+  line-height:1.8;
+  margin-top:6px;
+}
+.trend-number {
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.sdata-h {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.sdata-h p {
+  margin:0;
+  background:white;
+  border:1px solid #e8ddd0;
+  border-radius:20px;
+  padding:6px 11px;
+  font-size:12px;
+}
+.bigpct { text-align:center; }
+.bigpct b {
+  display:block;
+  font-size:44px;
+  margin:10px 0;
+}
+.bigpct span { font-size:12px; }
+.progress {
+  height:12px;
+  background:#e8ddd0;
+  border-radius:20px;
+  overflow:hidden;
+  margin:13px 0;
+}
+.progress i {
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--green));
+}
+.badge {
+  display:inline-block;
+  padding:6px 15px;
+  border-radius:20px;
+  background:#dcecd9;
+  color:var(--green);
+  font-weight:700;
+}
+.badge.fail {
+  background:#f3d9d8;
+  color:var(--red);
+}
+.center { text-align:center; }
+
+/* خمسة أعمدة للأسئلة دون إطارات أو خطوط للإجابة */
+#stWrong.wrong {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  column-gap:14px;
+  row-gap:10px;
+}
+#stWrong .question {
+  min-width:0;
+  min-height:0;
+  padding:4px 2px;
+  border:none;
+  border-radius:0;
+  background:transparent;
+  break-inside:avoid;
+}
+#stWrong .question-text {
+  font-size:13px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+
+.sugg {
+  margin-top:10px;
+  max-height:220px;
+  overflow:auto;
+}
+.suggestion {
+  display:block;
+  width:100%;
+  text-align:right;
+  background:white;
+  border:1px solid #e8ddd0;
+  border-radius:9px;
+  padding:9px;
+  margin-bottom:5px;
+  cursor:pointer;
+}
+
+table {
+  border-collapse:collapse;
+  width:100%;
+  font-size:12px;
+}
+th, td {
+  border:1px solid #dacdbb;
+  padding:8px;
+  text-align:center;
+}
+th { background:#eee2d0; }
+thead { display:table-header-group; }
+tr { break-inside:avoid; }
+.table-wrap { overflow:auto; }
+
+.hidden { display:none !important; }
+.pdf-head { display:none; }
+
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.4);
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+.modal.open { display:flex; }
+.mbox {
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-radius:15px;
+  width:100%;
+  max-width:800px;
+  max-height:85vh;
+  overflow:auto;
+  padding:18px;
+}
+#printModalReport { display:none; }
+.errbar {
+  display:none;
+  padding:10px;
+  background:var(--red);
+  color:white;
+  text-align:center;
+}
+
+@media (max-width:700px) {
+  .header {
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .teacher-name,
+  .header .btn {
+    justify-self:center;
+  }
+  .kpis {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .grid2 {
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+
+@page {
+  size:A4 portrait;
+  margin:10mm;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  body { background:white; }
+
+  .btn,
+  .filters,
+  .search-section,
+  .modal,
+  .errbar {
+    display:none !important;
+  }
+
+  .header {
+    padding:10px;
+    grid-template-columns:1fr auto 1fr;
+  }
+  .header h1 { font-size:19px; }
+  .teacher-name {
+    font-size:12px;
+    padding:6px 10px;
+  }
+  .container {
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:0;
+  }
+  .pdf-head {
+    display:block;
+    font-size:12px;
+    border-bottom:1px solid var(--accent);
+    margin-bottom:9px;
+    padding-bottom:6px;
+  }
+  .pdf-section { break-before:page; }
+  .section-title {
+    font-size:17px;
+    margin:12px 0 9px;
+  }
+  .grid2 {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  .card {
+    padding:10px;
+    margin-bottom:9px;
+  }
+  .belt {
+    overflow:visible;
+    border:none;
+    padding:15px 0 0;
+  }
+  .belt-inner {
+    width:100%;
+    flex-wrap:wrap;
+    transform:none !important;
+  }
+  .pill,
+  .scard {
+    break-inside:avoid;
+  }
+  .pill { white-space:normal; }
+
+  .chart-box { height:165px; }
+  .line-box { height:155px; }
+
+  .chart-print-ready canvas {
+    display:none !important;
+  }
+  .chart-print-ready .chart-print-image {
+    position:absolute;
+    top:0;
+    left:0;
+    display:block !important;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    margin:0;
+  }
+
+  body.print-summary .container > *:not(#secSummary),
+  body.print-section .container > *,
+  body.print-student .container > *:not(#studentSection),
+  body.print-attempts .container > *:not(#attemptsSection) {
+    display:none !important;
+  }
+
+  body.print-section .container > .print-target {
+    display:block !important;
+  }
+
+  body.print-section .print-target,
+  body.print-student #studentSection,
+  body.print-attempts #attemptsSection {
+    display:block !important;
+    break-before:auto !important;
+  }
+
+  body.print-student .sdata-h p {
+    font-size:11px;
+    padding:4px 9px;
+  }
+  body.print-student .bigpct b {
+    font-size:36px;
+  }
+
+  body.print-student #stWrong.wrong {
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    column-gap:12px;
+    row-gap:8px;
+  }
+  body.print-student #stWrong .question {
+    min-height:0;
+    padding:3px 2px;
+    border:none;
+    background:transparent;
+  }
+  body.print-student #stWrong .question-text {
+    font-size:12px;
+    line-height:1.6;
+  }
+
+  body.print-modal .header,
+  body.print-modal .container {
+    display:none !important;
+  }
+  body.print-modal #printModalReport {
+    display:block;
+  }
+  .table-wrap { overflow:visible; }
+}
+</style>
+</head>
+
+<body>
+<div id="errbar" class="errbar"></div>
+
+<header class="header">
+  <div class="teacher-name">أ / صالح الطويلعي</div>
+
+  <div class="header-center">
+    <h1>بيانات جدول الضرب</h1>
+    <div id="weekInfo" class="week-info"></div>
+  </div>
+
+  <button class="btn" onclick="printReport('summary')">
+    طباعة النتائج PDF
+  </button>
+</header>
+
+<main class="container">
+
+  <section id="secSummary">
+    <div class="pdf-head"></div>
+
+    <div class="filters">
+      <label for="fGrade">الصف:</label>
+      <select id="fGrade" onchange="render()"></select>
+
+      <label for="fWeek">الأسبوع:</label>
+      <select id="fWeek" onchange="render()"></select>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <b id="kStudents">0</b>
+        <span>عدد الطلاب</span>
+      </div>
+
+      <div class="kpi">
+        <b id="kAttempts">0</b>
+        <span>عدد المحاولات</span>
+      </div>
+
+      <div class="kpi">
+        <b id="kAvg">0</b>
+        <span>متوسط الدرجة</span>
+      </div>
+
+      <div class="kpi">
+        <b id="kTop">0</b>
+        <span>أعلى درجة</span>
+      </div>
+
+      <div class="kpi green click" onclick="openModal('perfect')">
+        <b id="kPerfect">0</b>
+        <span>محاولات بلا أخطاء</span>
+      </div>
+
+      <div class="kpi red click" onclick="openModal('weak')">
+        <b id="kWeak">0</b>
+        <span>محاولات ضعيفة</span>
+      </div>
+    </div>
+
+    <div class="section-title">نتائج جميع الطلاب</div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>الإجابات الصحيحة والخاطئة</h3>
+        <div class="chart-box">
+          <canvas id="chOverall"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>المحاولات بلا أخطاء والمحاولات الضعيفة</h3>
+        <div class="chart-box">
+          <canvas id="chQuality"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="secTop" class="pdf-section">
+    <div class="pdf-head"></div>
+
+    <div class="section-heading">
+      <div class="section-title">أفضل الطلاب</div>
+      <button class="btn" onclick="printReport('section','secTop')">
+        PDF
+      </button>
+    </div>
+
+    <div class="belt">
+      <div id="beltTop" class="belt-inner"></div>
+    </div>
+  </section>
+
+  <section id="secAll" class="pdf-section">
+    <div class="pdf-head"></div>
+
+    <div class="section-heading">
+      <div class="section-title">جميع الطلاب</div>
+      <button class="btn" onclick="printReport('section','secAll')">
+        PDF
+      </button>
+    </div>
+
+    <div class="belt">
+      <div id="beltAll" class="belt-inner"></div>
+    </div>
+  </section>
+
+  <section id="secUp" class="pdf-section">
+    <div class="pdf-head"></div>
+
+    <div class="section-heading">
+      <div class="section-title">حدث لهم تطور</div>
+      <button class="btn" onclick="printReport('section','secUp')">
+        PDF
+      </button>
+    </div>
+
+    <div class="belt">
+      <div id="beltUp" class="belt-inner"></div>
+    </div>
+  </section>
+
+  <section id="secDown" class="pdf-section">
+    <div class="pdf-head"></div>
+
+    <div class="section-heading">
+      <div class="section-title">حدث لهم هبوط</div>
+      <button class="btn" onclick="printReport('section','secDown')">
+        PDF
+      </button>
+    </div>
+
+    <div class="belt">
+      <div id="beltDown" class="belt-inner"></div>
+    </div>
+  </section>
+
+  <section id="secFollow" class="pdf-section">
+    <div class="pdf-head"></div>
+
+    <div class="section-heading">
+      <div class="section-title">يحتاج متابعة</div>
+      <button class="btn" onclick="printReport('section','secFollow')">
+        PDF
+      </button>
+    </div>
+
+    <div class="belt">
+      <div id="beltFollow" class="belt-inner"></div>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="section-title">البحث عن طالب</div>
+
+    <div class="card">
+      <input
+        id="searchBox"
+        class="search-box"
+        placeholder="اكتب اسم الطالب..."
+        oninput="doSearch()"
+      >
+      <div id="sugg" class="sugg"></div>
+    </div>
+  </section>
+
+  <section id="studentSection" class="hidden">
+    <div class="pdf-head"></div>
+    <div class="section-title">ملخص الطالب</div>
+
+    <div class="card">
+      <h3>بيانات الطالب</h3>
+      <div id="studentData" class="sdata-h"></div>
+    </div>
+
+    <div class="card">
+      <h3>الأسئلة الخاطئة في آخر محاولة</h3>
+      <div id="stWrong" class="wrong"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>نسبة الإتقان</h3>
+
+        <div class="bigpct">
+          <b id="stPct"></b>
+          <span>من إجمالي الدرجة</span>
+        </div>
+
+        <div class="progress">
+          <i id="stBar"></i>
+        </div>
+
+        <div class="center">
+          <span id="stResult" class="badge"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>الصحيح مقابل الخطأ</h3>
+        <div class="chart-box">
+          <canvas id="chDonut"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>منحنى تطور الدرجات</h3>
+      <div class="chart-box line-box">
+        <canvas id="chProgress"></canvas>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="toggleAttempts()">
+        إظهار جميع المحاولات
+      </button>
+
+      <button class="btn" onclick="printReport('student')">
+        طباعة لوحة الطالب PDF
+      </button>
+    </div>
+  </section>
+
+  <section id="attemptsSection" class="hidden">
+    <div class="pdf-head"></div>
+    <div id="attTitle" class="section-title">جميع المحاولات</div>
+
+    <div class="card">
+      <div class="actions">
+        <button class="btn" onclick="printReport('attempts')">
+          طباعة المحاولات PDF
+        </button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>المحاولة</th>
+              <th>الدرجة</th>
+              <th>المدة</th>
+              <th>التاريخ</th>
+              <th>وقت الإكمال</th>
+              <th>الأسبوع</th>
+            </tr>
+          </thead>
+
+          <tbody id="attBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="modal" class="modal">
+  <div class="mbox">
+    <h3 id="mTitle"></h3>
+    <div id="mList" class="table-wrap"></div>
+
+    <div class="actions">
+      <button class="btn" onclick="printModal()">PDF</button>
+      <button class="btn" onclick="closeModal()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<section id="printModalReport">
+  <div
+    class="teacher-name"
+    style="color:var(--brown);background:var(--card);display:inline-block"
+  >
+    أ / صالح الطويلعي
+  </div>
+
+  <h2 id="mpTitle"></h2>
+  <div id="mpContext" class="pdf-head"></div>
+  <div id="mpTable"></div>
+</section>
+
+<script>
+const ALL = [{"row": 2, "name": "عبدالله المطيري", "email": "s98561520@rb.moe.gov.sa", "grade": "خامس", "week": "2026-01-11", "date": "2026-01-11 16:00:00", "end": "2026-01-11 16:04:00", "duration_seconds": 240.0, "score": 22.0, "correct": 44, "wrong": 1, "question_count": 45, "wrong_questions": ["٣ × ٣ = ؟"]}, {"row": 3, "name": "عبدالله خيري", "email": "s93194551@rb.moe.gov.sa", "grade": "خامس", "week": "2026-01-11", "date": "2026-01-11 18:22:00", "end": "2026-01-11 18:31:00", "duration_seconds": 540.0, "score": 20.0, "correct": 40, "wrong": 5, "question_count": 45, "wrong_questions": ["٣ × ٨ = ؟", "٣ × ٩ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟"]}, {"row": 4, "name": "سعد العتيبي", "email": "s98620634@rb.moe.gov.sa", "grade": "خامس", "week": "2026-01-11", "date": "2026-01-11 19:05:00", "end": "2026-01-11 19:14:00", "duration_seconds": 540.0, "score": 22.5, "correct": 45, "wrong": 0, "question_count": 45, "wrong_questions": []}, {"row": 5, "name": "ابراهيم شراحيلي", "email": "s93272337@rb.moe.gov.sa", "grade": "خامس", "week": "2026-01-11", "date": "2026-01-11 19:56:00", "end": "2026-01-11 20:01:00", "duration_seconds": 300.0, "score": 22.5, "correct": 45, "wrong": 0, "question_count": 45, "wrong_questions": []}];
+const PASS = 13.5;
+const TOTAL = 22.5;
+const TOP_LIMIT = 10;
+
+const $ = id => document.getElementById(id);
+const charts = {};
+const beltFrames = {};
+
+let selectedEmail = null;
+let modalType = 'perfect';
+let printing = false;
+
+const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+}[ch]));
+
+function allWeeks() {
+  return [...new Set(ALL.map(a => a.week))].sort();
+}
+
+function weekNumber(week) {
+  return allWeeks().indexOf(week) + 1;
+}
+
+function gradeData() {
+  const grade = $('fGrade').value;
+  return ALL.filter(a => grade === 'all' || a.grade === grade);
+}
+
+function filtered() {
+  const week = $('fWeek').value;
+  return gradeData().filter(a => week === 'all' || a.week === week);
+}
+
+function contextText() {
+  const week = $('fWeek').value;
+  const grade = $('fGrade').value;
+
+  return (
+    week === 'all'
+      ? 'جميع الأسابيع'
+      : 'الأسبوع ' + weekNumber(week)
+  ) + ' | الصف: ' + (
+    grade === 'all' ? 'جميع الصفوف' : grade
+  );
+}
+
+function currentWeeks() {
+  const weeks = allWeeks();
+  const chosen = $('fWeek').value;
+
+  const index = chosen === 'all'
+    ? weeks.length - 1
+    : weeks.indexOf(chosen);
+
+  return {
+    current: weeks[index],
+    previous: index > 0 ? weeks[index - 1] : null
+  };
+}
+
+function hour12(value) {
+  if (!value || !value.includes(' ')) return '-';
+
+  const time = value.split(' ')[1].split(':');
+  const h = Number(time[0]);
+
+  return (h % 12 || 12) + ':' + time[1]
+    + (h < 12 ? ' صباحاً' : ' مساءً');
+}
+
+function durationText(a) {
+  if (a.duration_seconds === null) return '-';
+
+  const seconds = Math.round(a.duration_seconds);
+
+  return Math.floor(seconds / 60)
+    + ' د ' + (seconds % 60) + ' ث';
+}
+
+function chronological(records) {
+  return records.slice().sort((a,b) =>
+    a.date.localeCompare(b.date) || a.row - b.row
+  );
+}
+
+function aggregate(records) {
+  const groups = new Map();
+
+  records.forEach(a => {
+    if (!groups.has(a.email)) groups.set(a.email, []);
+    groups.get(a.email).push(a);
+  });
+
+  return [...groups.entries()].map(([email, rows]) => {
+    const recs = chronological(rows);
+    const scores = recs.map(a => a.score);
+    const durations = recs.filter(a => a.duration_seconds !== null);
+
+    return {
+      email,
+      recs,
+      name: recs.at(-1).name,
+      grade: recs.at(-1).grade,
+      last: recs.at(-1),
+      count: recs.length,
+      avg: scores.reduce((s,x) => s+x,0) / scores.length,
+      max: Math.max(...scores),
+      min: Math.min(...scores),
+      perfect: recs.filter(a =>
+        a.wrong === 0 && a.question_count > 0
+      ).length,
+      weak: recs.filter(a => a.score < PASS).length,
+      avgDuration: durations.length
+        ? durations.reduce(
+            (s,a) => s + a.duration_seconds, 0
+          ) / durations.length
+        : null
+    };
+  });
+}
+
+function byTime(a,b) {
+  const da = a.duration_seconds ?? Infinity;
+  const db = b.duration_seconds ?? Infinity;
+
+  if (da !== db) return da < db ? -1 : 1;
+
+  return (a.end || '9999').localeCompare(b.end || '9999')
+    || a.row - b.row;
+}
+
+function topStudents() {
+  const {current, previous} = currentWeeks();
+  const data = gradeData();
+
+  function fullIn(week) {
+    const result = new Map();
+
+    data.filter(a =>
+      a.week === week &&
+      Math.abs(a.score - TOTAL) < 0.000001
+    ).forEach(a => {
+      if (
+        !result.has(a.email) ||
+        byTime(a, result.get(a.email)) < 0
+      ) {
+        result.set(a.email, a);
+      }
+    });
+
+    return result;
+  }
+
+  const cur = fullIn(current);
+
+  if ($('fWeek').value !== 'all') {
+    const groups = new Map();
+
+    [...cur.values()].forEach(a => {
+      if (!groups.has(a.grade)) groups.set(a.grade, []);
+      groups.get(a.grade).push(a);
+    });
+
+    return [...groups.values()]
+      .flatMap(rows => rows.sort(byTime).slice(0, TOP_LIMIT))
+      .sort(byTime);
+  }
+
+  if (!previous) {
+    return [...cur.values()].sort(byTime);
+  }
+
+  const prev = fullIn(previous);
+
+  return [...cur.entries()]
+    .filter(([email]) => prev.has(email))
+    .map(([email,a]) =>
+      byTime(a, prev.get(email)) <= 0 ? a : prev.get(email)
+    )
+    .sort(byTime);
+}
+
+function trends() {
+  const {current, previous} = currentWeeks();
+  const up = [];
+  const down = [];
+
+  if (!previous) return {up, down};
+
+  const cur = new Map();
+  const prev = new Map();
+
+  chronological(gradeData()).forEach(a => {
+    if (a.week === current) cur.set(a.email, a);
+    if (a.week === previous) prev.set(a.email, a);
+  });
+
+  cur.forEach((a,email) => {
+    if (!prev.has(email)) return;
+
+    const old = prev.get(email);
+    const difference = a.score - old.score;
+
+    if (difference === 0) return;
+
+    const change = old.score === 0
+      ? null
+      : difference / old.score * 100;
+
+    const item = {
+      ...a,
+      change,
+      label: change === null
+        ? 'تحسن من صفر'
+        : Math.abs(change).toFixed(1).replace(/\.0$/,'') + '%'
+    };
+
+    (difference > 0 ? up : down).push(item);
+  });
+
+  up.sort((a,b) =>
+    (b.change ?? Infinity) - (a.change ?? Infinity)
+  );
+
+  down.sort((a,b) =>
+    (a.change ?? 0) - (b.change ?? 0)
+  );
+
+  return {up, down};
+}
+
+function followStudents() {
+  if ($('fWeek').value !== 'all') {
+    return aggregate(filtered()).filter(s => s.max < PASS);
+  }
+
+  const recent = new Set(allWeeks().slice(-3));
+
+  return aggregate(
+    gradeData().filter(a => recent.has(a.week))
+  ).filter(s => s.max < PASS);
+}
+
+function pill(a, trophy=false, extra='') {
+  const node = document.createElement('div');
+
+  node.className = 'pill' + (trophy ? ' top-pill' : '');
+
+  node.innerHTML =
+    (trophy ? '<span class="trophy">🏆</span>' : '')
+    + extra
+    + '<div class="pill-name">' + esc(a.name) + '</div>'
+    + '<div class="pill-grade">'
+    + esc(a.grade || 'بدون صف') + '</div>';
+
+  node.onclick = () => showStudent(a.email);
+
+  return node;
+}
+
+function buildBelt(id, items, builder) {
+  cancelAnimationFrame(beltFrames[id]);
+
+  const inner = $(id);
+  inner.replaceChildren();
+  inner.style.transform = 'none';
+
+  if (!items.length) {
+    const empty = document.createElement('div');
+    empty.className = 'pill';
+    empty.textContent = 'لا توجد بيانات';
+    inner.appendChild(empty);
+    return;
+  }
+
+  items.forEach(item => inner.appendChild(builder(item)));
+
+  let offset = 0;
+  let last = performance.now();
+  let paused = false;
+
+  const outer = inner.parentElement;
+
+  outer.onmouseenter = () => paused = true;
+  outer.onmouseleave = () => paused = false;
+
+  function step(now) {
+    const dt = Math.min((now-last)/1000, .05);
+    last = now;
+
+    if (
+      !paused &&
+      !printing &&
+      inner.scrollWidth > outer.clientWidth
+    ) {
+      offset += 45 * dt;
+
+      const first = inner.firstElementChild;
+      const width = first.offsetWidth + 10;
+
+      if (offset >= width) {
+        offset -= width;
+        inner.appendChild(first);
+      }
+
+      inner.style.transform = 'translateX(' + offset + 'px)';
+    }
+
+    beltFrames[id] = requestAnimationFrame(step);
+  }
+
+  beltFrames[id] = requestAnimationFrame(step);
+}
+
+function drawChart(id, type, data, extra={}) {
+  if (typeof Chart === 'undefined') return;
+
+  if (charts[id]) charts[id].destroy();
+
+  charts[id] = new Chart($(id), {
+    type,
+    data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      layout: {
+        padding: {
+          left:12,
+          right:12,
+          top:8,
+          bottom:4
+        }
+      },
+      plugins: {
+        legend: {
+          display: type !== 'line',
+          position: 'bottom',
+          labels: {
+            font: {
+              family:'Tahoma',
+              size:11
+            },
+            boxWidth:18
+          }
+        }
+      },
+      ...extra
+    }
+  });
+}
+
+function donut(id, values, labels, colors) {
+  drawChart(id, 'doughnut', {
+    labels,
+    datasets: [{
+      data: values,
+      backgroundColor: colors,
+      borderWidth: 2
+    }]
+  }, {
+    cutout:'60%'
+  });
+}
+
+function render() {
+  selectedEmail = null;
+
+  $('studentSection').classList.add('hidden');
+  $('attemptsSection').classList.add('hidden');
+
+  closeModal();
+
+  document.querySelectorAll('.pdf-head').forEach(el => {
+    el.textContent = contextText();
+  });
+
+  $('weekInfo').textContent = contextText();
+
+  const data = filtered();
+  const students = aggregate(data);
+  const scores = data.map(a => a.score);
+
+  const perfect = data.filter(a =>
+    a.wrong === 0 && a.question_count > 0
+  );
+
+  const weak = data.filter(a => a.score < PASS);
+
+  $('kStudents').textContent = students.length;
+  $('kAttempts').textContent = data.length;
+
+  $('kAvg').textContent = scores.length
+    ? (scores.reduce((s,x) => s+x,0) / scores.length).toFixed(2)
+    : '0';
+
+  $('kTop').textContent = scores.length
+    ? Math.max(...scores).toFixed(2)
+    : '0';
+
+  $('kPerfect').textContent = perfect.length;
+  $('kWeak').textContent = weak.length;
+
+  buildBelt('beltTop', topStudents(), a => pill(a,true));
+
+  buildBelt(
+    'beltAll',
+    students.sort((a,b) => b.avg-a.avg),
+    s => {
+      const node = document.createElement('div');
+      node.className = 'scard';
+
+      const pct = Math.round(s.avg / TOTAL * 100);
+
+      node.innerHTML =
+        '<div class="ring" style="--p:' + pct + '%">'
+        + '<span>' + pct + '%</span></div>'
+        + '<div class="pill-name">' + esc(s.name) + '</div>'
+        + '<div class="pill-grade">' + esc(s.grade) + '</div>'
+        + '<div class="smeta">المحاولات: ' + s.count
+        + '<br>المتوسط: ' + s.avg.toFixed(2)
+        + '<br>بلا أخطاء: ' + s.perfect
+        + ' — ضعيفة: ' + s.weak + '</div>';
+
+      node.onclick = () => showStudent(s.email);
+
+      return node;
+    }
+  );
+
+  const t = trends();
+
+  buildBelt('beltUp', t.up, a => pill(
+    a,
+    false,
+    '<div class="trend-number green">' + esc(a.label) + '</div>'
+  ));
+
+  buildBelt('beltDown', t.down, a => pill(
+    a,
+    false,
+    '<div class="trend-number red">' + esc(a.label) + '</div>'
+  ));
+
+  buildBelt(
+    'beltFollow',
+    followStudents(),
+    a => pill(a)
+  );
+
+  donut(
+    'chOverall',
+    [
+      data.reduce((s,a) => s+a.correct,0),
+      data.reduce((s,a) => s+a.wrong,0)
+    ],
+    ['صحيحة','خاطئة'],
+    ['#4E7C4E','#A94442']
+  );
+
+  donut(
+    'chQuality',
+    [perfect.length, weak.length],
+    ['بلا أخطاء','ضعيفة'],
+    ['#C9A66B','#A94442']
+  );
+
+  doSearch();
+}
+
+function doSearch() {
+  const q = $('searchBox').value.trim();
+
+  $('sugg').replaceChildren();
+
+  if (!q) return;
+
+  aggregate(gradeData())
+    .filter(s => s.name.includes(q))
+    .forEach(s => {
+      const node = document.createElement('button');
+
+      node.className = 'suggestion';
+      node.textContent = s.name
+        + ' — ' + (s.grade || 'بدون صف');
+
+      node.onclick = () => showStudent(s.email);
+
+      $('sugg').appendChild(node);
+    });
+}
+
+function showStudent(email) {
+  const allRecords = chronological(
+    gradeData().filter(a => a.email === email)
+  );
+
+  if (!allRecords.length) return;
+
+  const chosen = $('fWeek').value;
+
+  const range = allRecords.filter(a =>
+    chosen === 'all' || a.week === chosen
+  );
+
+  const records = range.length ? range : allRecords;
+  const s = aggregate(records)[0];
+
+  selectedEmail = email;
+
+  $('studentSection').classList.remove('hidden');
+  $('attemptsSection').classList.add('hidden');
+
+  const fields = [
+    ['الاسم', s.name],
+    ['الصف', s.grade || '-'],
+    ['المحاولات', s.count],
+    ['المتوسط', s.avg.toFixed(2)],
+    ['الأعلى', s.max.toFixed(2)],
+    ['الأدنى', s.min.toFixed(2)],
+    [
+      'متوسط الوقت',
+      s.avgDuration === null
+        ? '-'
+        : (s.avgDuration / 60).toFixed(1) + ' دقيقة'
+    ],
+    ['بلا أخطاء', s.perfect],
+    ['ضعيفة', s.weak],
+    ['آخر درجة', s.last.score.toFixed(2)],
+    ['التاريخ', s.last.date.slice(0,10)],
+    ['وقت الإكمال', hour12(s.last.end)],
+    ['مدة آخر محاولة', durationText(s.last)]
+  ];
+
+  $('studentData').innerHTML = fields.map(([k,v]) =>
+    '<p><b>' + esc(k) + ':</b> ' + esc(v) + '</p>'
+  ).join('');
+
+  const pct = Math.round(s.avg / TOTAL * 100);
+
+  $('stPct').textContent = pct + '%';
+
+  $('stBar').style.width =
+    Math.min(100, Math.max(0,pct)) + '%';
+
+  $('stResult').textContent =
+    s.avg >= PASS ? 'متقن' : 'غير متقن';
+
+  $('stResult').className =
+    'badge' + (s.avg >= PASS ? '' : ' fail');
+
+  $('stWrong').replaceChildren();
+
+  if (!s.last.wrong_questions.length) {
+    $('stWrong').textContent = 'لا توجد أخطاء';
+  } else {
+    s.last.wrong_questions.forEach(question => {
+      const box = document.createElement('div');
+      box.className = 'question';
+
+      const text = document.createElement('div');
+      text.className = 'question-text';
+      text.textContent = question;
+
+      box.appendChild(text);
+      $('stWrong').appendChild(box);
+    });
+  }
+
+  $('studentSection').querySelector('.pdf-head').textContent =
+    (
+      range.length
+        ? contextText()
+        : 'جميع محاولات الطالب | الصف: ' + s.grade
+    );
+
+  requestAnimationFrame(() => {
+    donut(
+      'chDonut',
+      [s.last.correct, s.last.wrong],
+      ['صحيحة','خاطئة'],
+      ['#4E7C4E','#A94442']
+    );
+
+    drawChart('chProgress', 'line', {
+      labels: allRecords.map((a,i) => 'اختبار ' + (i+1)),
+      datasets: [{
+        label:'الدرجة',
+        data:allRecords.map(a => a.score),
+        borderColor:'#6B4F2E',
+        backgroundColor:'rgba(201,166,107,.22)',
+        pointBackgroundColor:'#C9A66B',
+        pointRadius:3,
+        borderWidth:2,
+        tension:.25,
+        fill:true
+      }]
+    }, {
+      scales: {
+        x: {
+          offset:true,
+          ticks: {
+            maxRotation:0,
+            autoSkip:true
+          }
+        },
+        y: {
+          beginAtZero:true,
+          max:TOTAL
+        }
+      }
+    });
+  });
+
+  buildAttempts(allRecords);
+
+  $('studentSection').scrollIntoView({
+    behavior:'smooth'
+  });
+}
+
+function buildAttempts(records) {
+  const last = records.at(-1);
+
+  $('attTitle').textContent =
+    'جميع محاولات: ' + last.name;
+
+  $('attemptsSection').querySelector('.pdf-head').textContent =
+    'جميع الأسابيع | الصف: ' + (last.grade || '-');
+
+  $('attBody').innerHTML = records.map((a,i) =>
+    '<tr>'
+    + '<td>' + (i+1) + '</td>'
+    + '<td>' + a.score.toFixed(2) + '</td>'
+    + '<td>' + esc(durationText(a)) + '</td>'
+    + '<td>' + esc(a.date.slice(0,10)) + '</td>'
+    + '<td>' + esc(hour12(a.end)) + '</td>'
+    + '<td>' + weekNumber(a.week) + '</td>'
+    + '</tr>'
+  ).join('');
+}
+
+function toggleAttempts() {
+  if (!selectedEmail) return;
+
+  $('attemptsSection').classList.toggle('hidden');
+
+  if (!$('attemptsSection').classList.contains('hidden')) {
+    $('attemptsSection').scrollIntoView({
+      behavior:'smooth'
+    });
+  }
+}
+
+function modalRecords() {
+  return filtered().filter(a =>
+    modalType === 'perfect'
+      ? a.wrong === 0 && a.question_count > 0
+      : a.score < PASS
+  );
+}
+
+function attemptsTable(records) {
+  return '<table><thead><tr>'
+    + '<th>الاسم</th>'
+    + '<th>الصف</th>'
+    + '<th>الدرجة</th>'
+    + '<th>التاريخ</th>'
+    + '<th>وقت الإكمال</th>'
+    + '<th>الأسبوع</th>'
+    + '</tr></thead><tbody>'
+    + (
+      records.length
+        ? records.map(a =>
+            '<tr>'
+            + '<td>' + esc(a.name) + '</td>'
+            + '<td>' + esc(a.grade) + '</td>'
+            + '<td>' + a.score.toFixed(2) + '</td>'
+            + '<td>' + esc(a.date.slice(0,10)) + '</td>'
+            + '<td>' + esc(hour12(a.end)) + '</td>'
+            + '<td>' + weekNumber(a.week) + '</td>'
+            + '</tr>'
+          ).join('')
+        : '<tr><td colspan="6">لا توجد محاولات</td></tr>'
+    )
+    + '</tbody></table>';
+}
+
+function openModal(type) {
+  modalType = type;
+
+  $('mTitle').textContent = type === 'perfect'
+    ? 'المحاولات بلا أخطاء'
+    : 'المحاولات الضعيفة';
+
+  $('mList').innerHTML = attemptsTable(modalRecords());
+  $('modal').classList.add('open');
+}
+
+function closeModal() {
+  $('modal').classList.remove('open');
+}
+
+function printModal() {
+  $('mpTitle').textContent = $('mTitle').textContent;
+  $('mpContext').textContent = contextText();
+  $('mpTable').innerHTML = attemptsTable(modalRecords());
+
+  printReport('modal');
+}
+
+function prepareChartImages() {
+  Object.values(charts).forEach(chart => {
+    const canvas = chart.canvas;
+    const box = canvas.parentElement;
+
+    if (!box.getClientRects().length) return;
+
+    const rect = box.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) return;
+
+    chart.stop();
+    chart.resize(
+      Math.round(rect.width),
+      Math.round(rect.height)
+    );
+    chart.update('none');
+
+    let image = box.querySelector('.chart-print-image');
+
+    if (!image) {
+      image = document.createElement('img');
+      image.className = 'chart-print-image';
+      image.alt = 'رسم بياني';
+      box.appendChild(image);
+    }
+
+    image.src = chart.toBase64Image();
+    box.classList.add('chart-print-ready');
+  });
+}
+
+function resetPrint() {
+  printing = false;
+
+  document.body.classList.remove(
+    'print-summary',
+    'print-section',
+    'print-student',
+    'print-attempts',
+    'print-modal'
+  );
+
+  document.querySelectorAll('.print-target').forEach(el =>
+    el.classList.remove('print-target')
+  );
+
+  document.querySelectorAll('.chart-print-ready').forEach(el =>
+    el.classList.remove('chart-print-ready')
+  );
+
+  requestAnimationFrame(() => {
+    Object.values(charts).forEach(chart => {
+      if (chart.canvas.parentElement.getClientRects().length) {
+        chart.resize();
+        chart.update('none');
+      }
+    });
+  });
+}
+
+async function printReport(mode, targetId=null) {
+  prepareChartImages();
+
+  const images = [
+    ...document.querySelectorAll('.chart-print-image')
+  ];
+
+  await Promise.all(images.map(img =>
+    img.decode
+      ? img.decode().catch(() => {})
+      : Promise.resolve()
+  ));
+
+  printing = true;
+
+  document.body.classList.remove(
+    'print-summary',
+    'print-section',
+    'print-student',
+    'print-attempts',
+    'print-modal'
+  );
+
+  document.querySelectorAll('.print-target').forEach(el =>
+    el.classList.remove('print-target')
+  );
+
+  if (targetId) {
+    $(targetId).classList.add('print-target');
+  }
+
+  document.body.classList.add('print-' + mode);
+
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => window.print())
+  );
+}
+
+window.addEventListener('beforeprint', () => {
+  if (!printing) prepareChartImages();
+});
+
+window.addEventListener('afterprint', resetPrint);
+
+window.onerror = function(message) {
+  $('errbar').style.display = 'block';
+  $('errbar').textContent = 'خطأ في الصفحة: ' + message;
+};
+
+function init() {
+  const grades = [
+    ...new Set(ALL.map(a => a.grade).filter(Boolean))
+  ].sort();
+
+  $('fGrade').innerHTML =
+    '<option value="all">الكل</option>'
+    + grades.map(g =>
+      '<option value="' + esc(g) + '">' + esc(g) + '</option>'
+    ).join('');
+
+  $('fWeek').innerHTML =
+    '<option value="all">الكل</option>'
+    + allWeeks().map((w,i) =>
+      '<option value="' + w + '">الأسبوع ' + (i+1) + '</option>'
+    ).join('');
+
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
