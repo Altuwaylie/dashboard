@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root {
+:root{
   --bg:#F5EFE6;
   --card:#FBF7F0;
   --accent:#C9A66B;
@@ -16,16 +16,16 @@
   --red:#A94442;
   --gold:#B8860B;
 }
-* {
+*{
   box-sizing:border-box;
   font-family:"Segoe UI",Tahoma,sans-serif;
 }
-body {
+body{
   margin:0;
   background:var(--bg);
   color:var(--brown);
 }
-.header {
+.header{
   background:linear-gradient(135deg,var(--brown),var(--accent));
   color:white;
   padding:20px;
@@ -34,12 +34,9 @@ body {
   align-items:center;
   gap:16px;
 }
-.header h1 {
-  font-size:24px;
-  margin:0;
-}
-.header-center { text-align:center; }
-.teacher-name {
+.header h1{font-size:24px;margin:0}
+.header-center{text-align:center}
+.teacher-name{
   justify-self:start;
   background:rgba(255,255,255,.18);
   border:1px solid rgba(255,255,255,.5);
@@ -48,16 +45,15 @@ body {
   font-size:15px;
   font-weight:700;
 }
-.header .btn { justify-self:end; }
-.week-info { font-size:13px; margin-top:6px; }
-
-.container {
+.header .btn{justify-self:end}
+.week-info{font-size:13px;margin-top:6px}
+.container{
   width:100%;
   max-width:1150px;
   margin:auto;
   padding:18px;
 }
-.btn {
+.btn{
   border:1px solid var(--accent);
   background:white;
   color:var(--brown);
@@ -67,26 +63,26 @@ body {
   font-weight:700;
   cursor:pointer;
 }
-.actions {
+.actions{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin:10px 0;
 }
-.section-title {
+.section-title{
   border-right:5px solid var(--accent);
   padding-right:10px;
   margin:22px 0 12px;
   font-size:19px;
   font-weight:800;
 }
-.section-heading {
+.section-heading{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
 }
-.card {
+.card{
   background:var(--card);
   border:1px solid var(--accent);
   border-radius:15px;
@@ -94,58 +90,47 @@ body {
   margin-bottom:13px;
   min-width:0;
 }
-.card h3 {
-  margin:0 0 10px;
-  font-size:15px;
-}
-.filters {
+.card h3{margin:0 0 10px;font-size:15px}
+.filters{
   display:flex;
   gap:10px;
   align-items:center;
   flex-wrap:wrap;
   margin-bottom:14px;
 }
-select, .search-box {
+select,.search-box{
   border:1px solid var(--accent);
   border-radius:9px;
   padding:9px 12px;
   color:var(--brown);
   background:white;
 }
-.search-box {
-  width:100%;
-  font-size:14px;
-}
-
-.kpis {
+select{max-width:100%}
+.search-box{width:100%;font-size:14px}
+.kpis{
   display:grid;
   grid-template-columns:repeat(6,minmax(0,1fr));
   gap:9px;
 }
-.kpi {
+.kpi{
   background:var(--card);
   border:1px solid var(--accent);
   border-radius:13px;
   padding:12px 7px;
   text-align:center;
 }
-.kpi b {
-  display:block;
-  font-size:23px;
-}
-.kpi span { font-size:11px; }
-.click { cursor:pointer; }
-.green { color:var(--green); }
-.red { color:var(--red); }
-
-.grid2 {
+.kpi b{display:block;font-size:23px}
+.kpi span{font-size:11px}
+.click{cursor:pointer}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.grid2{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:13px;
 }
-.grid2 > * { min-width:0; }
-
-.chart-box {
+.grid2>*{min-width:0}
+.chart-box{
   position:relative;
   width:100%;
   min-width:0;
@@ -153,32 +138,32 @@ select, .search-box {
   height:210px;
   direction:ltr;
 }
-.chart-box canvas {
-  position:absolute !important;
-  inset:0 auto auto 0 !important;
-  display:block !important;
-  width:100% !important;
-  height:100% !important;
-  margin:0 !important;
-  transform:none !important;
+.chart-box canvas{
+  position:absolute!important;
+  inset:0 auto auto 0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  transform:none!important;
 }
-.line-box { height:205px; }
-.chart-print-image { display:none; }
-
-.belt {
+.line-box{height:205px}
+.chart-print-image{display:none}
+.belt{
   overflow:hidden;
   background:var(--card);
   border:1px solid var(--accent);
   border-radius:14px;
   padding:17px 10px 10px;
 }
-.belt-inner {
+.belt-inner{
   display:flex;
   gap:10px;
   width:max-content;
   max-width:none;
+  will-change:transform;
 }
-.pill {
+.pill{
   position:relative;
   background:white;
   border:1px solid var(--accent);
@@ -189,27 +174,17 @@ select, .search-box {
   flex-shrink:0;
   cursor:pointer;
 }
-.pill-name {
-  font-size:14px;
-  font-weight:800;
-}
-.pill-grade {
-  font-size:11px;
-  margin-top:4px;
-  color:#88775f;
-}
-.top-pill {
-  border-color:var(--gold);
-  padding-inline:24px;
-}
-.trophy {
+.pill-name{font-size:14px;font-weight:800}
+.pill-grade{font-size:11px;margin-top:4px;color:#88775f}
+.top-pill{border-color:var(--gold);padding-inline:24px}
+.trophy{
   position:absolute;
   right:-5px;
   top:-15px;
   font-size:24px;
   transform:rotate(18deg);
 }
-.scard {
+.scard{
   width:190px;
   flex-shrink:0;
   background:white;
@@ -219,7 +194,7 @@ select, .search-box {
   text-align:center;
   cursor:pointer;
 }
-.ring {
+.ring{
   width:76px;
   height:76px;
   margin:0 auto 8px;
@@ -228,7 +203,7 @@ select, .search-box {
   place-items:center;
   background:conic-gradient(var(--accent) var(--p),#e8ddd0 0);
 }
-.ring span {
+.ring span{
   width:59px;
   height:59px;
   border-radius:50%;
@@ -237,23 +212,10 @@ select, .search-box {
   place-items:center;
   font-weight:800;
 }
-.smeta {
-  font-size:11px;
-  line-height:1.8;
-  margin-top:6px;
-}
-.trend-number {
-  font-size:20px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.sdata-h {
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-.sdata-h p {
+.smeta{font-size:11px;line-height:1.8;margin-top:6px}
+.trend-number{font-size:20px;font-weight:800;margin-bottom:5px}
+.sdata-h{display:flex;flex-wrap:wrap;gap:7px}
+.sdata-h p{
   margin:0;
   background:white;
   border:1px solid #e8ddd0;
@@ -261,26 +223,22 @@ select, .search-box {
   padding:6px 11px;
   font-size:12px;
 }
-.bigpct { text-align:center; }
-.bigpct b {
-  display:block;
-  font-size:44px;
-  margin:10px 0;
-}
-.bigpct span { font-size:12px; }
-.progress {
+.bigpct{text-align:center}
+.bigpct b{display:block;font-size:44px;margin:10px 0}
+.bigpct span{font-size:12px}
+.progress{
   height:12px;
   background:#e8ddd0;
   border-radius:20px;
   overflow:hidden;
   margin:13px 0;
 }
-.progress i {
+.progress i{
   display:block;
   height:100%;
   background:linear-gradient(90deg,var(--accent),var(--green));
 }
-.badge {
+.badge{
   display:inline-block;
   padding:6px 15px;
   border-radius:20px;
@@ -288,40 +246,31 @@ select, .search-box {
   color:var(--green);
   font-weight:700;
 }
-.badge.fail {
-  background:#f3d9d8;
-  color:var(--red);
-}
-.center { text-align:center; }
-
-/* خمسة أعمدة للأسئلة دون إطارات أو خطوط للإجابة */
-#stWrong.wrong {
+.badge.fail{background:#f3d9d8;color:var(--red)}
+.center{text-align:center}
+.note{font-size:12px;line-height:1.9;color:#88775f}
+#lastAttemptInfo{margin-bottom:10px}
+#stWrong.wrong{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   column-gap:14px;
   row-gap:10px;
 }
-#stWrong .question {
+#stWrong .question{
   min-width:0;
-  min-height:0;
   padding:4px 2px;
   border:none;
-  border-radius:0;
   background:transparent;
   break-inside:avoid;
 }
-#stWrong .question-text {
+#stWrong .question-text{
   font-size:13px;
   line-height:1.6;
   overflow-wrap:anywhere;
 }
-
-.sugg {
-  margin-top:10px;
-  max-height:220px;
-  overflow:auto;
-}
-.suggestion {
+#stWrong .message{grid-column:1/-1}
+.sugg{margin-top:10px;max-height:220px;overflow:auto}
+.suggestion{
   display:block;
   width:100%;
   text-align:right;
@@ -332,26 +281,15 @@ select, .search-box {
   margin-bottom:5px;
   cursor:pointer;
 }
-
-table {
-  border-collapse:collapse;
-  width:100%;
-  font-size:12px;
-}
-th, td {
-  border:1px solid #dacdbb;
-  padding:8px;
-  text-align:center;
-}
-th { background:#eee2d0; }
-thead { display:table-header-group; }
-tr { break-inside:avoid; }
-.table-wrap { overflow:auto; }
-
-.hidden { display:none !important; }
-.pdf-head { display:none; }
-
-.modal {
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{border:1px solid #dacdbb;padding:8px;text-align:center}
+th{background:#eee2d0}
+thead{display:table-header-group}
+tr{break-inside:avoid}
+.table-wrap{overflow:auto}
+.hidden{display:none!important}
+.pdf-head{display:none}
+.modal{
   display:none;
   position:fixed;
   inset:0;
@@ -361,8 +299,8 @@ tr { break-inside:avoid; }
   justify-content:center;
   padding:15px;
 }
-.modal.open { display:flex; }
-.mbox {
+.modal.open{display:flex}
+.mbox{
   background:var(--card);
   border:1px solid var(--accent);
   border-radius:15px;
@@ -372,169 +310,90 @@ tr { break-inside:avoid; }
   overflow:auto;
   padding:18px;
 }
-#printModalReport { display:none; }
-.errbar {
+#printModalReport{display:none}
+.errbar{
   display:none;
   padding:10px;
   background:var(--red);
   color:white;
   text-align:center;
 }
-
-@media (max-width:700px) {
-  .header {
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-  .teacher-name,
-  .header .btn {
-    justify-self:center;
-  }
-  .kpis {
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-  .grid2 {
-    grid-template-columns:minmax(0,1fr);
-  }
+@media(max-width:700px){
+  .header{grid-template-columns:1fr;text-align:center}
+  .teacher-name,.header .btn{justify-self:center}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid2{grid-template-columns:minmax(0,1fr)}
 }
-
-@page {
-  size:A4 portrait;
-  margin:10mm;
+@media(max-width:450px){
+  #stWrong.wrong{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-
-@media print {
-  * {
-    -webkit-print-color-adjust:exact;
-    print-color-adjust:exact;
-  }
-  body { background:white; }
-
-  .btn,
-  .filters,
-  .search-section,
-  .modal,
-  .errbar {
-    display:none !important;
-  }
-
-  .header {
-    padding:10px;
-    grid-template-columns:1fr auto 1fr;
-  }
-  .header h1 { font-size:19px; }
-  .teacher-name {
-    font-size:12px;
-    padding:6px 10px;
-  }
-  .container {
-    width:100%;
-    max-width:100%;
-    margin:0;
-    padding:0;
-  }
-  .pdf-head {
+@page{size:A4 portrait;margin:10mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:white}
+  .btn,.filters,.search-section,.modal,.errbar{display:none!important}
+  .header{padding:10px;grid-template-columns:1fr auto 1fr}
+  .header h1{font-size:19px}
+  .teacher-name{font-size:12px;padding:6px 10px}
+  .container{width:100%;max-width:100%;margin:0;padding:0}
+  .pdf-head{
     display:block;
     font-size:12px;
     border-bottom:1px solid var(--accent);
     margin-bottom:9px;
     padding-bottom:6px;
   }
-  .pdf-section { break-before:page; }
-  .section-title {
-    font-size:17px;
-    margin:12px 0 9px;
-  }
-  .grid2 {
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  }
-  .card {
-    padding:10px;
-    margin-bottom:9px;
-  }
-  .belt {
-    overflow:visible;
-    border:none;
-    padding:15px 0 0;
-  }
-  .belt-inner {
+  .pdf-section{break-before:page}
+  .section-title{font-size:17px;margin:12px 0 9px}
+  .grid2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .card{padding:10px;margin-bottom:9px}
+  .belt{overflow:visible;border:none;padding:15px 0 0}
+  .belt-inner{
     width:100%;
     flex-wrap:wrap;
-    transform:none !important;
+    transform:none!important;
+    will-change:auto;
   }
-  .pill,
-  .scard {
-    break-inside:avoid;
-  }
-  .pill { white-space:normal; }
-
-  .chart-box { height:165px; }
-  .line-box { height:155px; }
-
-  .chart-print-ready canvas {
-    display:none !important;
-  }
-  .chart-print-ready .chart-print-image {
+  .pill,.scard{break-inside:avoid}
+  .pill{white-space:normal}
+  .chart-box{height:165px}
+  .line-box{height:155px}
+  .chart-print-ready canvas{display:none!important}
+  .chart-print-ready .chart-print-image{
     position:absolute;
     top:0;
     left:0;
-    display:block !important;
+    display:block!important;
     width:100%;
     height:100%;
     object-fit:contain;
     margin:0;
   }
-
-  body.print-summary .container > *:not(#secSummary),
-  body.print-section .container > *,
-  body.print-student .container > *:not(#studentSection),
-  body.print-attempts .container > *:not(#attemptsSection) {
-    display:none !important;
+  body.print-summary .container>*:not(#secSummary),
+  body.print-section .container>*,
+  body.print-student .container>*:not(#studentSection),
+  body.print-attempts .container>*:not(#attemptsSection){
+    display:none!important;
   }
-
-  body.print-section .container > .print-target {
-    display:block !important;
-  }
-
+  body.print-section .container>.print-target{display:block!important}
   body.print-section .print-target,
   body.print-student #studentSection,
-  body.print-attempts #attemptsSection {
-    display:block !important;
-    break-before:auto !important;
+  body.print-attempts #attemptsSection{
+    display:block!important;
+    break-before:auto!important;
   }
-
-  body.print-student .sdata-h p {
-    font-size:11px;
-    padding:4px 9px;
-  }
-  body.print-student .bigpct b {
-    font-size:36px;
-  }
-
-  body.print-student #stWrong.wrong {
+  body.print-student .sdata-h p{font-size:11px;padding:4px 9px}
+  body.print-student .bigpct b{font-size:36px}
+  body.print-student #stWrong.wrong{
     grid-template-columns:repeat(5,minmax(0,1fr));
     column-gap:12px;
     row-gap:8px;
   }
-  body.print-student #stWrong .question {
-    min-height:0;
-    padding:3px 2px;
-    border:none;
-    background:transparent;
-  }
-  body.print-student #stWrong .question-text {
-    font-size:12px;
-    line-height:1.6;
-  }
-
-  body.print-modal .header,
-  body.print-modal .container {
-    display:none !important;
-  }
-  body.print-modal #printModalReport {
-    display:block;
-  }
-  .table-wrap { overflow:visible; }
+  body.print-student #stWrong .question{padding:3px 2px}
+  body.print-student #stWrong .question-text{font-size:12px}
+  body.print-modal .header,body.print-modal .container{display:none!important}
+  body.print-modal #printModalReport{display:block}
+  .table-wrap{overflow:visible}
 }
 </style>
 </head>
@@ -544,265 +403,165 @@ tr { break-inside:avoid; }
 
 <header class="header">
   <div class="teacher-name">أ / صالح الطويلعي</div>
-
   <div class="header-center">
     <h1>بيانات جدول الضرب</h1>
     <div id="weekInfo" class="week-info"></div>
   </div>
-
   <button class="btn" onclick="printReport('summary')">
     طباعة النتائج PDF
   </button>
 </header>
 
 <main class="container">
-
-  <section id="secSummary">
-    <div class="pdf-head"></div>
-
-    <div class="filters">
-      <label for="fGrade">الصف:</label>
-      <select id="fGrade" onchange="render()"></select>
-
-      <label for="fWeek">الأسبوع:</label>
-      <select id="fWeek" onchange="render()"></select>
+<section id="secSummary">
+  <div class="pdf-head"></div>
+  <div class="filters">
+    <label for="fGrade">الصف:</label>
+    <select id="fGrade" onchange="render()"></select>
+    <label for="fWeek">الأسبوع:</label>
+    <select id="fWeek" onchange="render()"></select>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><b id="kStudents">0</b><span>عدد الطلاب</span></div>
+    <div class="kpi"><b id="kAttempts">0</b><span>عدد المحاولات</span></div>
+    <div class="kpi"><b id="kAvg">0</b><span>متوسط الدرجة</span></div>
+    <div class="kpi"><b id="kTop">0</b><span>أعلى درجة</span></div>
+    <div class="kpi green click" onclick="openModal('perfect')">
+      <b id="kPerfect">0</b><span>محاولات بلا أخطاء</span>
     </div>
-
-    <div class="kpis">
-      <div class="kpi">
-        <b id="kStudents">0</b>
-        <span>عدد الطلاب</span>
-      </div>
-
-      <div class="kpi">
-        <b id="kAttempts">0</b>
-        <span>عدد المحاولات</span>
-      </div>
-
-      <div class="kpi">
-        <b id="kAvg">0</b>
-        <span>متوسط الدرجة</span>
-      </div>
-
-      <div class="kpi">
-        <b id="kTop">0</b>
-        <span>أعلى درجة</span>
-      </div>
-
-      <div class="kpi green click" onclick="openModal('perfect')">
-        <b id="kPerfect">0</b>
-        <span>محاولات بلا أخطاء</span>
-      </div>
-
-      <div class="kpi red click" onclick="openModal('weak')">
-        <b id="kWeak">0</b>
-        <span>محاولات ضعيفة</span>
-      </div>
+    <div class="kpi red click" onclick="openModal('weak')">
+      <b id="kWeak">0</b><span>محاولات ضعيفة</span>
     </div>
-
-    <div class="section-title">نتائج جميع الطلاب</div>
-
-    <div class="grid2">
-      <div class="card">
-        <h3>الإجابات الصحيحة والخاطئة</h3>
-        <div class="chart-box">
-          <canvas id="chOverall"></canvas>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>المحاولات بلا أخطاء والمحاولات الضعيفة</h3>
-        <div class="chart-box">
-          <canvas id="chQuality"></canvas>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="secTop" class="pdf-section">
-    <div class="pdf-head"></div>
-
-    <div class="section-heading">
-      <div class="section-title">أفضل الطلاب</div>
-      <button class="btn" onclick="printReport('section','secTop')">
-        PDF
-      </button>
-    </div>
-
-    <div class="belt">
-      <div id="beltTop" class="belt-inner"></div>
-    </div>
-  </section>
-
-  <section id="secAll" class="pdf-section">
-    <div class="pdf-head"></div>
-
-    <div class="section-heading">
-      <div class="section-title">جميع الطلاب</div>
-      <button class="btn" onclick="printReport('section','secAll')">
-        PDF
-      </button>
-    </div>
-
-    <div class="belt">
-      <div id="beltAll" class="belt-inner"></div>
-    </div>
-  </section>
-
-  <section id="secUp" class="pdf-section">
-    <div class="pdf-head"></div>
-
-    <div class="section-heading">
-      <div class="section-title">حدث لهم تطور</div>
-      <button class="btn" onclick="printReport('section','secUp')">
-        PDF
-      </button>
-    </div>
-
-    <div class="belt">
-      <div id="beltUp" class="belt-inner"></div>
-    </div>
-  </section>
-
-  <section id="secDown" class="pdf-section">
-    <div class="pdf-head"></div>
-
-    <div class="section-heading">
-      <div class="section-title">حدث لهم هبوط</div>
-      <button class="btn" onclick="printReport('section','secDown')">
-        PDF
-      </button>
-    </div>
-
-    <div class="belt">
-      <div id="beltDown" class="belt-inner"></div>
-    </div>
-  </section>
-
-  <section id="secFollow" class="pdf-section">
-    <div class="pdf-head"></div>
-
-    <div class="section-heading">
-      <div class="section-title">يحتاج متابعة</div>
-      <button class="btn" onclick="printReport('section','secFollow')">
-        PDF
-      </button>
-    </div>
-
-    <div class="belt">
-      <div id="beltFollow" class="belt-inner"></div>
-    </div>
-  </section>
-
-  <section class="search-section">
-    <div class="section-title">البحث عن طالب</div>
-
+  </div>
+  <div class="section-title">نتائج جميع الطلاب</div>
+  <div class="grid2">
     <div class="card">
-      <input
-        id="searchBox"
-        class="search-box"
-        placeholder="اكتب اسم الطالب..."
-        oninput="doSearch()"
-      >
-      <div id="sugg" class="sugg"></div>
+      <h3>الإجابات الصحيحة والخاطئة</h3>
+      <div class="chart-box"><canvas id="chOverall"></canvas></div>
     </div>
-  </section>
-
-  <section id="studentSection" class="hidden">
-    <div class="pdf-head"></div>
-    <div class="section-title">ملخص الطالب</div>
-
     <div class="card">
-      <h3>بيانات الطالب</h3>
-      <div id="studentData" class="sdata-h"></div>
+      <h3>المحاولات بلا أخطاء والمحاولات الضعيفة</h3>
+      <div class="chart-box"><canvas id="chQuality"></canvas></div>
     </div>
+  </div>
+</section>
 
+<section id="secTop" class="pdf-section">
+  <div class="pdf-head"></div>
+  <div class="section-heading">
+    <div class="section-title">أفضل الطلاب</div>
+    <button class="btn" onclick="printReport('section','secTop')">PDF</button>
+  </div>
+  <div class="belt"><div id="beltTop" class="belt-inner"></div></div>
+</section>
+
+<section id="secAll" class="pdf-section">
+  <div class="pdf-head"></div>
+  <div class="section-heading">
+    <div class="section-title">جميع الطلاب</div>
+    <button class="btn" onclick="printReport('section','secAll')">PDF</button>
+  </div>
+  <div class="belt"><div id="beltAll" class="belt-inner"></div></div>
+</section>
+
+<section id="secUp" class="pdf-section">
+  <div class="pdf-head"></div>
+  <div class="section-heading">
+    <div class="section-title">حدث لهم تطور</div>
+    <button class="btn" onclick="printReport('section','secUp')">PDF</button>
+  </div>
+  <div class="belt"><div id="beltUp" class="belt-inner"></div></div>
+</section>
+
+<section id="secDown" class="pdf-section">
+  <div class="pdf-head"></div>
+  <div class="section-heading">
+    <div class="section-title">حدث لهم هبوط</div>
+    <button class="btn" onclick="printReport('section','secDown')">PDF</button>
+  </div>
+  <div class="belt"><div id="beltDown" class="belt-inner"></div></div>
+</section>
+
+<section id="secFollow" class="pdf-section">
+  <div class="pdf-head"></div>
+  <div class="section-heading">
+    <div class="section-title">يحتاج متابعة</div>
+    <button class="btn" onclick="printReport('section','secFollow')">PDF</button>
+  </div>
+  <div class="belt"><div id="beltFollow" class="belt-inner"></div></div>
+</section>
+
+<section class="search-section">
+  <div class="section-title">البحث عن طالب</div>
+  <div class="card">
+    <input id="searchBox" class="search-box"
+      placeholder="اكتب اسم الطالب..." oninput="doSearch()">
+    <div id="sugg" class="sugg"></div>
+  </div>
+</section>
+
+<section id="studentSection" class="hidden">
+  <div class="pdf-head"></div>
+  <div class="section-title">ملخص الطالب</div>
+  <div class="card">
+    <h3>بيانات الطالب</h3>
+    <div id="studentData" class="sdata-h"></div>
+  </div>
+  <div class="card">
+    <h3>الأسئلة الخاطئة في آخر محاولة</h3>
+    <div id="lastAttemptInfo" class="note"></div>
+    <div id="stWrong" class="wrong"></div>
+  </div>
+  <div class="grid2">
     <div class="card">
-      <h3>الأسئلة الخاطئة في آخر محاولة</h3>
-      <div id="stWrong" class="wrong"></div>
-    </div>
-
-    <div class="grid2">
-      <div class="card">
-        <h3>نسبة الإتقان</h3>
-
-        <div class="bigpct">
-          <b id="stPct"></b>
-          <span>من إجمالي الدرجة</span>
-        </div>
-
-        <div class="progress">
-          <i id="stBar"></i>
-        </div>
-
-        <div class="center">
-          <span id="stResult" class="badge"></span>
-        </div>
+      <h3>نسبة الإتقان — حسب الأسابيع المختارة</h3>
+      <div class="bigpct">
+        <b id="stPct"></b>
+        <span>متوسط الدرجات ضمن النطاق المختار</span>
       </div>
-
-      <div class="card">
-        <h3>الصحيح مقابل الخطأ</h3>
-        <div class="chart-box">
-          <canvas id="chDonut"></canvas>
-        </div>
-      </div>
+      <div class="progress"><i id="stBar"></i></div>
+      <div class="center"><span id="stResult" class="badge"></span></div>
     </div>
-
     <div class="card">
-      <h3>منحنى تطور الدرجات</h3>
-      <div class="chart-box line-box">
-        <canvas id="chProgress"></canvas>
-      </div>
+      <h3>الصحيح مقابل الخطأ — آخر محاولة</h3>
+      <div class="chart-box"><canvas id="chDonut"></canvas></div>
+      <div id="stUnknown" class="note"></div>
     </div>
+  </div>
+  <div class="card">
+    <h3>منحنى تطور الدرجات</h3>
+    <div class="chart-box line-box"><canvas id="chProgress"></canvas></div>
+  </div>
+  <div class="actions">
+    <button class="btn" onclick="toggleAttempts()">إظهار جميع المحاولات</button>
+    <button class="btn" onclick="printReport('student')">طباعة لوحة الطالب PDF</button>
+  </div>
+</section>
 
+<section id="attemptsSection" class="hidden">
+  <div class="pdf-head"></div>
+  <div id="attTitle" class="section-title">جميع المحاولات</div>
+  <div class="card">
     <div class="actions">
-      <button class="btn" onclick="toggleAttempts()">
-        إظهار جميع المحاولات
-      </button>
-
-      <button class="btn" onclick="printReport('student')">
-        طباعة لوحة الطالب PDF
-      </button>
+      <button class="btn" onclick="printReport('attempts')">طباعة المحاولات PDF</button>
     </div>
-  </section>
-
-  <section id="attemptsSection" class="hidden">
-    <div class="pdf-head"></div>
-    <div id="attTitle" class="section-title">جميع المحاولات</div>
-
-    <div class="card">
-      <div class="actions">
-        <button class="btn" onclick="printReport('attempts')">
-          طباعة المحاولات PDF
-        </button>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>المحاولة</th>
-              <th>الدرجة</th>
-              <th>المدة</th>
-              <th>التاريخ</th>
-              <th>وقت الإكمال</th>
-              <th>الأسبوع</th>
-            </tr>
-          </thead>
-
-          <tbody id="attBody"></tbody>
-        </table>
-      </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>المحاولة</th><th>الدرجة</th><th>المدة</th>
+          <th>التاريخ</th><th>وقت الإكمال</th><th>الأسبوع</th>
+        </tr></thead>
+        <tbody id="attBody"></tbody>
+      </table>
     </div>
-  </section>
-
+  </div>
+</section>
 </main>
 
 <div id="modal" class="modal">
   <div class="mbox">
     <h3 id="mTitle"></h3>
     <div id="mList" class="table-wrap"></div>
-
     <div class="actions">
       <button class="btn" onclick="printModal()">PDF</button>
       <button class="btn" onclick="closeModal()">إغلاق</button>
@@ -811,23 +570,22 @@ tr { break-inside:avoid; }
 </div>
 
 <section id="printModalReport">
-  <div
-    class="teacher-name"
-    style="color:var(--brown);background:var(--card);display:inline-block"
-  >
+  <div class="teacher-name"
+    style="color:var(--brown);background:var(--card);display:inline-block">
     أ / صالح الطويلعي
   </div>
-
   <h2 id="mpTitle"></h2>
   <div id="mpContext" class="pdf-head"></div>
   <div id="mpTable"></div>
 </section>
 
 <script>
-const ALL = [{"row": 2, "name": "عبدالله المطيري", "email": "s98561520@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 16:00:36", "end": "2026-11-01 16:04:04", "duration_seconds": 208.0, "duration": 3.466666666666667, "score": 22.0, "correct": 24, "wrong": 1, "question_count": 25, "wrong_questions": ["٣ × ٣ = ؟"]}, {"row": 3, "name": "عبدالله خيري", "email": "s93194551@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 18:22:19", "end": "2026-11-01 18:31:50", "duration_seconds": 571.0, "duration": 9.516666666666667, "score": 20.0, "correct": 23, "wrong": 2, "question_count": 25, "wrong_questions": ["٣ × ٨ = ؟", "٣ × ٩ = ؟"]}, {"row": 4, "name": "سعد العتيبي", "email": "s98620634@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 19:05:00", "end": "2026-11-01 19:14:14", "duration_seconds": 554.0, "duration": 9.233333333333333, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 5, "name": "ابراهيم شراحيلي", "email": "s93272337@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 19:56:18", "end": "2026-11-01 20:01:11", "duration_seconds": 293.0, "duration": 4.883333333333334, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 6, "name": "محمد العقيل", "email": "s95141521@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 21:22:58", "end": "2026-11-01 21:29:34", "duration_seconds": 396.0, "duration": 6.6, "score": 22.0, "correct": 24, "wrong": 1, "question_count": 25, "wrong_questions": ["١ × ٦ = ؟"]}, {"row": 7, "name": "عبدالعزيز الحربي", "email": "s95359427@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 13:36:18", "end": "2026-11-03 13:49:04", "duration_seconds": 766.0, "duration": 12.766666666666667, "score": 22.0, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 8, "name": "عمار ابراهيم", "email": "s92040154@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 18:35:27", "end": "2026-11-03 18:38:22", "duration_seconds": 175.0, "duration": 2.9166666666666665, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 10, "name": "عبدالله العتيبي", "email": "s9831974@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 20:01:05", "end": "2026-11-03 20:23:30", "duration_seconds": 1345.0, "duration": 22.416666666666668, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 9, "name": "أنس حسان", "email": "s94614815@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 20:17:59", "end": "2026-11-03 20:21:54", "duration_seconds": 235.0, "duration": 3.9166666666666665, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 11, "name": "محمد سامر", "email": "s9748120@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 23:09:35", "end": "2026-11-03 23:25:25", "duration_seconds": 950.0, "duration": 15.833333333333334, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 12, "name": "ماجد المسند", "email": "s94473273@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 19:40:36", "end": "2026-11-04 19:42:45", "duration_seconds": 129.0, "duration": 2.15, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 14, "name": "أنس العتيبي", "email": "s97566969@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 20:00:36", "end": "2026-11-04 20:37:28", "duration_seconds": 2212.0, "duration": 36.86666666666667, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 13, "name": "رامز سيد", "email": "s9256976@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 20:27:28", "end": "2026-11-04 20:35:40", "duration_seconds": 492.0, "duration": 8.2, "score": 21.0, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 15, "name": "ناصر العبدالكريم", "email": "s98462931@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 21:28:14", "end": "2026-11-04 21:35:43", "duration_seconds": 449.0, "duration": 7.483333333333333, "score": 21.5, "correct": 24, "wrong": 1, "question_count": 25, "wrong_questions": ["٤ × ٩ = ؟"]}, {"row": 16, "name": "ابراهيم العنزي", "email": "s98216592@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-05 10:44:30", "end": "2026-11-05 10:51:10", "duration_seconds": 400.0, "duration": 6.666666666666667, "score": 21.5, "correct": 25, "wrong": 0, "question_count": 25, "wrong_questions": []}, {"row": 17, "name": "مطلق الحارثي", "email": "s95474901@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-05 16:42:30", "end": "2026-11-05 16:56:26", "duration_seconds": 836.0, "duration": 13.933333333333334, "score": 20.0, "correct": 24, "wrong": 1, "question_count": 25, "wrong_questions": ["٤ × ٩ = ؟"]}];
+const ALL = [{"row": 2, "name": "عبدالله المطيري", "email": "s98561520@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 16:00:36", "end": "2026-11-01 16:04:04", "duration_seconds": 208.0, "duration": 3.466666666666667, "score": 22.0, "correct": 24, "wrong": 1, "question_count": 45, "wrong_questions": ["٣ × ٣ = ؟"], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 3, "name": "عبدالله خيري", "email": "s93194551@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 18:22:19", "end": "2026-11-01 18:31:50", "duration_seconds": 571.0, "duration": 9.516666666666667, "score": 20.0, "correct": 23, "wrong": 2, "question_count": 45, "wrong_questions": ["٣ × ٨ = ؟", "٣ × ٩ = ؟"], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 4, "name": "سعد العتيبي", "email": "s98620634@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 19:05:00", "end": "2026-11-01 19:14:14", "duration_seconds": 554.0, "duration": 9.233333333333333, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 5, "name": "ابراهيم شراحيلي", "email": "s93272337@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 19:56:18", "end": "2026-11-01 20:01:11", "duration_seconds": 293.0, "duration": 4.883333333333334, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 6, "name": "محمد العقيل", "email": "s95141521@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-01 21:22:58", "end": "2026-11-01 21:29:34", "duration_seconds": 396.0, "duration": 6.6, "score": 22.0, "correct": 24, "wrong": 1, "question_count": 45, "wrong_questions": ["١ × ٦ = ؟"], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 7, "name": "عبدالعزيز الحربي", "email": "s95359427@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 13:36:18", "end": "2026-11-03 13:49:04", "duration_seconds": 766.0, "duration": 12.766666666666667, "score": 22.0, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 8, "name": "عمار ابراهيم", "email": "s92040154@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 18:35:27", "end": "2026-11-03 18:38:22", "duration_seconds": 175.0, "duration": 2.9166666666666665, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 10, "name": "عبدالله العتيبي", "email": "s9831974@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 20:01:05", "end": "2026-11-03 20:23:30", "duration_seconds": 1345.0, "duration": 22.416666666666668, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 9, "name": "أنس حسان", "email": "s94614815@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 20:17:59", "end": "2026-11-03 20:21:54", "duration_seconds": 235.0, "duration": 3.9166666666666665, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 11, "name": "محمد سامر", "email": "s9748120@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-03 23:09:35", "end": "2026-11-03 23:25:25", "duration_seconds": 950.0, "duration": 15.833333333333334, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 12, "name": "ماجد المسند", "email": "s94473273@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 19:40:36", "end": "2026-11-04 19:42:45", "duration_seconds": 129.0, "duration": 2.15, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 14, "name": "أنس العتيبي", "email": "s97566969@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 20:00:36", "end": "2026-11-04 20:37:28", "duration_seconds": 2212.0, "duration": 36.86666666666667, "score": 22.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 13, "name": "رامز سيد", "email": "s9256976@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 20:27:28", "end": "2026-11-04 20:35:40", "duration_seconds": 492.0, "duration": 8.2, "score": 21.0, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 15, "name": "ناصر العبدالكريم", "email": "s98462931@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-04 21:28:14", "end": "2026-11-04 21:35:43", "duration_seconds": 449.0, "duration": 7.483333333333333, "score": 21.5, "correct": 24, "wrong": 1, "question_count": 45, "wrong_questions": ["٤ × ٩ = ؟"], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 16, "name": "ابراهيم العنزي", "email": "s98216592@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-05 10:44:30", "end": "2026-11-05 10:51:10", "duration_seconds": 400.0, "duration": 6.666666666666667, "score": 21.5, "correct": 25, "wrong": 0, "question_count": 45, "wrong_questions": [], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}, {"row": 17, "name": "مطلق الحارثي", "email": "s95474901@rb.moe.gov.sa", "grade": "خامس", "week": "2026-11-01", "date": "2026-11-05 16:42:30", "end": "2026-11-05 16:56:26", "duration_seconds": 836.0, "duration": 13.933333333333334, "score": 20.0, "correct": 24, "wrong": 1, "question_count": 45, "wrong_questions": ["٤ × ٩ = ؟"], "unknown_count": 20, "unknown_questions": ["١ × ٩ = ؟", "٢ × ٢ = ؟", "٢ × ٣ = ؟", "٢ × ٤ = ؟", "٢ × ٥ = ؟", "٢ × ٦ = ؟", "٢ × ٧ = ؟", "٢ × ٨ = ؟", "٥ × ٨ = ؟", "٥ × ٩ = ؟", "٦ × ٦ = ؟", "٦ × ٧ = ؟", "٦ × ٨ = ؟", "٦ × ٩ = ؟", "٧ × ٧ = ؟", "٧ × ٨ = ؟", "٧ × ٩ = ؟", "٨ × ٨ = ؟", "٨ × ٩ = ؟", "٩ × ٩ = ؟"]}];
 const PASS = 13.5;
 const TOTAL = 22.5;
 const TOP_LIMIT = 10;
+const PROJECT_START_KEY = "2026-11-01";
+const WEEK_MS = 7 * 86400000;
 
 const $ = id => document.getElementById(id);
 const charts = {};
@@ -845,138 +603,174 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
   "'":'&#39;'
 }[ch]));
 
+function dateValue(key) {
+  const [year,month,day] = key.split('-').map(Number);
+  return Date.UTC(year,month-1,day);
+}
+
+function dateKey(value) {
+  return new Date(value).toISOString().slice(0,10);
+}
+
+function todayWeek() {
+  const now = new Date();
+  const today = Date.UTC(
+    now.getFullYear(),now.getMonth(),now.getDate()
+  );
+  const first = dateValue(PROJECT_START_KEY);
+  const index = Math.max(0,Math.floor((today-first)/WEEK_MS));
+  return dateKey(first+index*WEEK_MS);
+}
+
 function allWeeks() {
-  return [...new Set(ALL.map(a => a.week))].sort();
+  const weeks = new Set(ALL.map(a => a.week));
+  const first = dateValue(PROJECT_START_KEY);
+  const last = dateValue(todayWeek());
+
+  for (let value=first;value<=last;value+=WEEK_MS) {
+    weeks.add(dateKey(value));
+  }
+
+  return [...weeks].sort();
 }
 
 function weekNumber(week) {
-  return allWeeks().indexOf(week) + 1;
+  return Math.floor(
+    (dateValue(week)-dateValue(PROJECT_START_KEY))/WEEK_MS
+  )+1;
+}
+
+function weekLabel(week) {
+  const value = dateValue(week);
+  const name = value < dateValue(PROJECT_START_KEY)
+    ? 'قبل بداية المشروع'
+    : 'الأسبوع '+weekNumber(week);
+
+  return name+' — '+week+' إلى '+dateKey(value+6*86400000);
+}
+
+function fillWeeks() {
+  const selected = $('fWeek').value || 'all';
+
+  $('fWeek').innerHTML = '<option value="all">الكل</option>'
+    + allWeeks().map(week =>
+      '<option value="'+week+'">'+esc(weekLabel(week))+'</option>'
+    ).join('');
+
+  if ([...$('fWeek').options].some(o => o.value===selected)) {
+    $('fWeek').value = selected;
+  }
 }
 
 function gradeData() {
   const grade = $('fGrade').value;
-  return ALL.filter(a => grade === 'all' || a.grade === grade);
+  return ALL.filter(a => grade==='all'||a.grade===grade);
 }
 
 function filtered() {
   const week = $('fWeek').value;
-  return gradeData().filter(a => week === 'all' || a.week === week);
+  return gradeData().filter(a => week==='all'||a.week===week);
 }
 
 function contextText() {
   const week = $('fWeek').value;
   const grade = $('fGrade').value;
 
-  return (
-    week === 'all'
-      ? 'جميع الأسابيع'
-      : 'الأسبوع ' + weekNumber(week)
-  ) + ' | الصف: ' + (
-    grade === 'all' ? 'جميع الصفوف' : grade
-  );
+  return (week==='all'?'جميع الأسابيع':weekLabel(week))
+    +' | الصف: '+(grade==='all'?'جميع الصفوف':grade);
 }
 
 function currentWeeks() {
-  const weeks = allWeeks();
   const chosen = $('fWeek').value;
-
-  const index = chosen === 'all'
-    ? weeks.length - 1
-    : weeks.indexOf(chosen);
+  const current = chosen==='all'?todayWeek():chosen;
+  const previous = dateKey(dateValue(current)-WEEK_MS);
 
   return {
-    current: weeks[index],
-    previous: index > 0 ? weeks[index - 1] : null
+    current,
+    previous:allWeeks().includes(previous)?previous:null
   };
 }
 
 function hour12(value) {
-  if (!value || !value.includes(' ')) return '-';
-
+  if (!value||!value.includes(' ')) return '-';
   const time = value.split(' ')[1].split(':');
   const h = Number(time[0]);
-
-  return (h % 12 || 12) + ':' + time[1]
-    + (h < 12 ? ' صباحاً' : ' مساءً');
+  return (h%12||12)+':'+time[1]+(h<12?' صباحاً':' مساءً');
 }
 
 function durationText(a) {
-  if (a.duration_seconds === null) return '-';
-
+  if (a.duration_seconds==null) return '-';
   const seconds = Math.round(a.duration_seconds);
-
-  return Math.floor(seconds / 60)
-    + ' د ' + (seconds % 60) + ' ث';
+  return Math.floor(seconds/60)+' د '+(seconds%60)+' ث';
 }
 
 function chronological(records) {
   return records.slice().sort((a,b) =>
-    a.date.localeCompare(b.date) || a.row - b.row
+    a.date.localeCompare(b.date)||a.row-b.row
   );
+}
+
+function isPerfectAttempt(a) {
+  return a.question_count>0
+    && a.wrong===0
+    && (a.unknown_count||0)===0
+    && Math.abs(a.score-TOTAL)<0.000001;
 }
 
 function aggregate(records) {
   const groups = new Map();
 
   records.forEach(a => {
-    if (!groups.has(a.email)) groups.set(a.email, []);
+    if (!groups.has(a.email)) groups.set(a.email,[]);
     groups.get(a.email).push(a);
   });
 
-  return [...groups.entries()].map(([email, rows]) => {
+  return [...groups.entries()].map(([email,rows]) => {
     const recs = chronological(rows);
+    const last = recs[recs.length-1];
     const scores = recs.map(a => a.score);
-    const durations = recs.filter(a => a.duration_seconds !== null);
+    const durations = recs.filter(a => a.duration_seconds!=null);
 
     return {
-      email,
-      recs,
-      name: recs.at(-1).name,
-      grade: recs.at(-1).grade,
-      last: recs.at(-1),
-      count: recs.length,
-      avg: scores.reduce((s,x) => s+x,0) / scores.length,
-      max: Math.max(...scores),
-      min: Math.min(...scores),
-      perfect: recs.filter(a =>
-        a.wrong === 0 && a.question_count > 0
-      ).length,
-      weak: recs.filter(a => a.score < PASS).length,
-      avgDuration: durations.length
-        ? durations.reduce(
-            (s,a) => s + a.duration_seconds, 0
-          ) / durations.length
+      email,recs,last,
+      name:last.name,
+      grade:last.grade,
+      count:recs.length,
+      avg:scores.reduce((sum,x)=>sum+x,0)/scores.length,
+      max:Math.max(...scores),
+      min:Math.min(...scores),
+      perfect:recs.filter(isPerfectAttempt).length,
+      weak:recs.filter(a=>a.score<PASS).length,
+      avgDuration:durations.length
+        ? durations.reduce((sum,a)=>sum+a.duration_seconds,0)
+          /durations.length
         : null
     };
   });
 }
 
 function byTime(a,b) {
-  const da = a.duration_seconds ?? Infinity;
-  const db = b.duration_seconds ?? Infinity;
+  const da = a.duration_seconds??Infinity;
+  const db = b.duration_seconds??Infinity;
 
-  if (da !== db) return da < db ? -1 : 1;
+  if (da!==db) return da<db?-1:1;
 
-  return (a.end || '9999').localeCompare(b.end || '9999')
-    || a.row - b.row;
+  return (a.end||'9999').localeCompare(b.end||'9999')
+    ||a.row-b.row;
 }
 
 function topStudents() {
-  const {current, previous} = currentWeeks();
+  const {current,previous} = currentWeeks();
   const data = gradeData();
 
   function fullIn(week) {
     const result = new Map();
 
     data.filter(a =>
-      a.week === week &&
-      Math.abs(a.score - TOTAL) < 0.000001
+      a.week===week&&Math.abs(a.score-TOTAL)<0.000001
     ).forEach(a => {
-      if (
-        !result.has(a.email) ||
-        byTime(a, result.get(a.email)) < 0
-      ) {
-        result.set(a.email, a);
+      if (!result.has(a.email)||byTime(a,result.get(a.email))<0) {
+        result.set(a.email,a);
       }
     });
 
@@ -985,115 +779,108 @@ function topStudents() {
 
   const cur = fullIn(current);
 
-  if ($('fWeek').value !== 'all') {
+  if ($('fWeek').value!=='all') {
     const groups = new Map();
 
     [...cur.values()].forEach(a => {
-      if (!groups.has(a.grade)) groups.set(a.grade, []);
+      if (!groups.has(a.grade)) groups.set(a.grade,[]);
       groups.get(a.grade).push(a);
     });
 
     return [...groups.values()]
-      .flatMap(rows => rows.sort(byTime).slice(0, TOP_LIMIT))
+      .flatMap(rows=>rows.sort(byTime).slice(0,TOP_LIMIT))
       .sort(byTime);
   }
 
-  if (!previous) {
-    return [...cur.values()].sort(byTime);
-  }
+  if (!previous) return [...cur.values()].sort(byTime);
 
   const prev = fullIn(previous);
 
   return [...cur.entries()]
-    .filter(([email]) => prev.has(email))
-    .map(([email,a]) =>
-      byTime(a, prev.get(email)) <= 0 ? a : prev.get(email)
-    )
-    .sort(byTime);
+    .filter(([email])=>prev.has(email))
+    .map(([email,a])=>
+      byTime(a,prev.get(email))<=0?a:prev.get(email)
+    ).sort(byTime);
 }
 
 function trends() {
-  const {current, previous} = currentWeeks();
-  const up = [];
-  const down = [];
+  const {current,previous} = currentWeeks();
+  const up=[],down=[];
 
-  if (!previous) return {up, down};
+  if (!previous) return {up,down};
 
-  const cur = new Map();
-  const prev = new Map();
+  const cur=new Map(),prev=new Map();
 
   chronological(gradeData()).forEach(a => {
-    if (a.week === current) cur.set(a.email, a);
-    if (a.week === previous) prev.set(a.email, a);
+    if (a.week===current) cur.set(a.email,a);
+    if (a.week===previous) prev.set(a.email,a);
   });
 
   cur.forEach((a,email) => {
     if (!prev.has(email)) return;
 
     const old = prev.get(email);
-    const difference = a.score - old.score;
+    const difference = a.score-old.score;
 
-    if (difference === 0) return;
+    if (difference===0) return;
 
-    const change = old.score === 0
-      ? null
-      : difference / old.score * 100;
+    const change = old.score===0
+      ? null : difference/old.score*100;
 
     const item = {
-      ...a,
-      change,
-      label: change === null
+      ...a,change,
+      label:change===null
         ? 'تحسن من صفر'
-        : Math.abs(change).toFixed(1).replace(/\.0$/,'') + '%'
+        : Math.abs(change).toFixed(1).replace(/\.0$/,'')+'%'
     };
 
-    (difference > 0 ? up : down).push(item);
+    (difference>0?up:down).push(item);
   });
 
-  up.sort((a,b) =>
-    (b.change ?? Infinity) - (a.change ?? Infinity)
-  );
+  up.sort((a,b)=>(b.change??Infinity)-(a.change??Infinity));
+  down.sort((a,b)=>(a.change??0)-(b.change??0));
 
-  down.sort((a,b) =>
-    (a.change ?? 0) - (b.change ?? 0)
-  );
-
-  return {up, down};
+  return {up,down};
 }
 
 function followStudents() {
-  if ($('fWeek').value !== 'all') {
-    return aggregate(filtered()).filter(s => s.max < PASS);
+  if ($('fWeek').value!=='all') {
+    return aggregate(filtered()).filter(s=>s.max<PASS);
   }
 
-  const recent = new Set(allWeeks().slice(-3));
+  const current = dateValue(todayWeek());
 
-  return aggregate(
-    gradeData().filter(a => recent.has(a.week))
-  ).filter(s => s.max < PASS);
+  return aggregate(gradeData().filter(a => {
+    const value = dateValue(a.week);
+    return value<=current&&value>=current-2*WEEK_MS;
+  })).filter(s=>s.max<PASS);
 }
 
-function pill(a, trophy=false, extra='') {
+function pill(a,trophy=false,extra='') {
   const node = document.createElement('div');
-
-  node.className = 'pill' + (trophy ? ' top-pill' : '');
+  node.className = 'pill'+(trophy?' top-pill':'');
 
   node.innerHTML =
-    (trophy ? '<span class="trophy">🏆</span>' : '')
-    + extra
-    + '<div class="pill-name">' + esc(a.name) + '</div>'
-    + '<div class="pill-grade">'
-    + esc(a.grade || 'بدون صف') + '</div>';
+    (trophy?'<span class="trophy">🏆</span>':'')
+    +extra
+    +'<div class="pill-name">'+esc(a.name)+'</div>'
+    +'<div class="pill-grade">'+esc(a.grade||'بدون صف')+'</div>';
 
-  node.onclick = () => showStudent(a.email);
-
+  node.onclick = ()=>showStudent(a.email);
   return node;
 }
 
-function buildBelt(id, items, builder) {
+function buildBelt(id,items,builder) {
   cancelAnimationFrame(beltFrames[id]);
 
   const inner = $(id);
+  const outer = inner.parentElement;
+
+  if (outer._beltCleanup) outer._beltCleanup();
+
+  outer.onmouseenter = null;
+  outer.onmouseleave = null;
+
   inner.replaceChildren();
   inner.style.transform = 'none';
 
@@ -1105,74 +892,94 @@ function buildBelt(id, items, builder) {
     return;
   }
 
-  items.forEach(item => inner.appendChild(builder(item)));
+  items.forEach(item=>inner.appendChild(builder(item)));
 
-  let offset = 0;
-  let last = performance.now();
-  let paused = false;
+  let offset=0;
+  let last=performance.now();
+  let paused=false;
 
-  const outer = inner.parentElement;
+  const mouseHover = window.matchMedia(
+    '(any-hover: hover) and (any-pointer: fine)'
+  );
 
-  outer.onmouseenter = () => paused = true;
-  outer.onmouseleave = () => paused = false;
-
-  function step(now) {
-    const dt = Math.min((now-last)/1000, .05);
-    last = now;
-
-    if (
-      !paused &&
-      !printing &&
-      inner.scrollWidth > outer.clientWidth
-    ) {
-      offset += 45 * dt;
-
-      const first = inner.firstElementChild;
-      const width = first.offsetWidth + 10;
-
-      if (offset >= width) {
-        offset -= width;
-        inner.appendChild(first);
-      }
-
-      inner.style.transform = 'translateX(' + offset + 'px)';
+  function enter(event) {
+    if (event.pointerType==='mouse'&&mouseHover.matches) {
+      paused=true;
     }
-
-    beltFrames[id] = requestAnimationFrame(step);
   }
 
-  beltFrames[id] = requestAnimationFrame(step);
+  function leave(event) {
+    if (event.pointerType==='mouse') paused=false;
+  }
+
+  function down(event) {
+    if (event.pointerType!=='mouse') paused=false;
+  }
+
+  function release() {
+    paused=false;
+  }
+
+  outer.addEventListener('pointerenter',enter);
+  outer.addEventListener('pointerleave',leave);
+  outer.addEventListener('pointerdown',down);
+  outer.addEventListener('pointercancel',release);
+  window.addEventListener('blur',release);
+
+  outer._beltCleanup = function() {
+    outer.removeEventListener('pointerenter',enter);
+    outer.removeEventListener('pointerleave',leave);
+    outer.removeEventListener('pointerdown',down);
+    outer.removeEventListener('pointercancel',release);
+    window.removeEventListener('blur',release);
+  };
+
+  function step(now) {
+    const dt=Math.min((now-last)/1000,.05);
+    last=now;
+
+    if (!paused&&!printing&&inner.scrollWidth>outer.clientWidth) {
+      offset+=45*dt;
+
+      const first=inner.firstElementChild;
+
+      if (first) {
+        const gap=parseFloat(getComputedStyle(inner).columnGap)||10;
+        const width=first.getBoundingClientRect().width+gap;
+
+        if (width>0&&offset>=width) {
+          offset-=width;
+          inner.appendChild(first);
+        }
+
+        inner.style.transform='translateX('+offset+'px)';
+      }
+    }
+
+    beltFrames[id]=requestAnimationFrame(step);
+  }
+
+  beltFrames[id]=requestAnimationFrame(step);
 }
 
-function drawChart(id, type, data, extra={}) {
-  if (typeof Chart === 'undefined') return;
+function drawChart(id,type,data,extra={}) {
+  if (typeof Chart==='undefined') return;
 
   if (charts[id]) charts[id].destroy();
 
-  charts[id] = new Chart($(id), {
-    type,
-    data,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: false,
-      layout: {
-        padding: {
-          left:12,
-          right:12,
-          top:8,
-          bottom:4
-        }
-      },
-      plugins: {
-        legend: {
-          display: type !== 'line',
-          position: 'bottom',
-          labels: {
-            font: {
-              family:'Tahoma',
-              size:11
-            },
+  charts[id]=new Chart($(id),{
+    type,data,
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      animation:false,
+      layout:{padding:{left:12,right:12,top:8,bottom:4}},
+      plugins:{
+        legend:{
+          display:type!=='line',
+          position:'bottom',
+          labels:{
+            font:{family:'Tahoma',size:11},
             boxWidth:18
           }
         }
@@ -1182,243 +989,215 @@ function drawChart(id, type, data, extra={}) {
   });
 }
 
-function donut(id, values, labels, colors) {
-  drawChart(id, 'doughnut', {
+function donut(id,values,labels,colors) {
+  drawChart(id,'doughnut',{
     labels,
-    datasets: [{
-      data: values,
-      backgroundColor: colors,
-      borderWidth: 2
+    datasets:[{
+      data:values,
+      backgroundColor:colors,
+      borderWidth:2
     }]
-  }, {
-    cutout:'60%'
-  });
+  },{cutout:'60%'});
 }
 
 function render() {
-  selectedEmail = null;
+  selectedEmail=null;
 
   $('studentSection').classList.add('hidden');
   $('attemptsSection').classList.add('hidden');
-
   closeModal();
 
-  document.querySelectorAll('.pdf-head').forEach(el => {
-    el.textContent = contextText();
+  document.querySelectorAll('.pdf-head').forEach(el=>{
+    el.textContent=contextText();
   });
 
-  $('weekInfo').textContent = contextText();
+  $('weekInfo').textContent=contextText();
 
-  const data = filtered();
-  const students = aggregate(data);
-  const scores = data.map(a => a.score);
+  const data=filtered();
+  const students=aggregate(data);
+  const scores=data.map(a=>a.score);
+  const perfect=data.filter(isPerfectAttempt);
+  const weak=data.filter(a=>a.score<PASS);
 
-  const perfect = data.filter(a =>
-    a.wrong === 0 && a.question_count > 0
-  );
-
-  const weak = data.filter(a => a.score < PASS);
-
-  $('kStudents').textContent = students.length;
-  $('kAttempts').textContent = data.length;
-
-  $('kAvg').textContent = scores.length
-    ? (scores.reduce((s,x) => s+x,0) / scores.length).toFixed(2)
+  $('kStudents').textContent=students.length;
+  $('kAttempts').textContent=data.length;
+  $('kAvg').textContent=scores.length
+    ? (scores.reduce((sum,x)=>sum+x,0)/scores.length).toFixed(2)
     : '0';
+  $('kTop').textContent=scores.length
+    ? Math.max(...scores).toFixed(2):'0';
+  $('kPerfect').textContent=perfect.length;
+  $('kWeak').textContent=weak.length;
 
-  $('kTop').textContent = scores.length
-    ? Math.max(...scores).toFixed(2)
-    : '0';
+  buildBelt('beltTop',topStudents(),a=>pill(a,true));
 
-  $('kPerfect').textContent = perfect.length;
-  $('kWeak').textContent = weak.length;
+  buildBelt('beltAll',students.sort((a,b)=>b.avg-a.avg),s=>{
+    const node=document.createElement('div');
+    node.className='scard';
 
-  buildBelt('beltTop', topStudents(), a => pill(a,true));
+    const pct=Math.round(s.avg/TOTAL*100);
+    const displayPct=Math.min(100,Math.max(0,pct));
 
-  buildBelt(
-    'beltAll',
-    students.sort((a,b) => b.avg-a.avg),
-    s => {
-      const node = document.createElement('div');
-      node.className = 'scard';
+    node.innerHTML=
+      '<div class="ring" style="--p:'+displayPct+'%">'
+      +'<span>'+pct+'%</span></div>'
+      +'<div class="pill-name">'+esc(s.name)+'</div>'
+      +'<div class="pill-grade">'+esc(s.grade)+'</div>'
+      +'<div class="smeta">المحاولات: '+s.count
+      +'<br>المتوسط: '+s.avg.toFixed(2)
+      +'<br>بلا أخطاء: '+s.perfect
+      +' — ضعيفة: '+s.weak+'</div>';
 
-      const pct = Math.round(s.avg / TOTAL * 100);
+    node.onclick=()=>showStudent(s.email);
+    return node;
+  });
 
-      node.innerHTML =
-        '<div class="ring" style="--p:' + pct + '%">'
-        + '<span>' + pct + '%</span></div>'
-        + '<div class="pill-name">' + esc(s.name) + '</div>'
-        + '<div class="pill-grade">' + esc(s.grade) + '</div>'
-        + '<div class="smeta">المحاولات: ' + s.count
-        + '<br>المتوسط: ' + s.avg.toFixed(2)
-        + '<br>بلا أخطاء: ' + s.perfect
-        + ' — ضعيفة: ' + s.weak + '</div>';
+  const t=trends();
 
-      node.onclick = () => showStudent(s.email);
+  buildBelt('beltUp',t.up,a=>pill(a,false,
+    '<div class="trend-number green">'+esc(a.label)+'</div>'));
 
-      return node;
-    }
-  );
+  buildBelt('beltDown',t.down,a=>pill(a,false,
+    '<div class="trend-number red">'+esc(a.label)+'</div>'));
 
-  const t = trends();
+  buildBelt('beltFollow',followStudents(),a=>pill(a));
 
-  buildBelt('beltUp', t.up, a => pill(
-    a,
-    false,
-    '<div class="trend-number green">' + esc(a.label) + '</div>'
-  ));
+  donut('chOverall',[
+    data.reduce((sum,a)=>sum+a.correct,0),
+    data.reduce((sum,a)=>sum+a.wrong,0)
+  ],['صحيحة','خاطئة'],['#4E7C4E','#A94442']);
 
-  buildBelt('beltDown', t.down, a => pill(
-    a,
-    false,
-    '<div class="trend-number red">' + esc(a.label) + '</div>'
-  ));
-
-  buildBelt(
-    'beltFollow',
-    followStudents(),
-    a => pill(a)
-  );
-
-  donut(
-    'chOverall',
-    [
-      data.reduce((s,a) => s+a.correct,0),
-      data.reduce((s,a) => s+a.wrong,0)
-    ],
-    ['صحيحة','خاطئة'],
-    ['#4E7C4E','#A94442']
-  );
-
-  donut(
-    'chQuality',
-    [perfect.length, weak.length],
-    ['بلا أخطاء','ضعيفة'],
-    ['#C9A66B','#A94442']
-  );
+  donut('chQuality',[perfect.length,weak.length],
+    ['بلا أخطاء','ضعيفة'],['#C9A66B','#A94442']);
 
   doSearch();
 }
 
 function doSearch() {
-  const q = $('searchBox').value.trim();
-
+  const q=$('searchBox').value.trim();
   $('sugg').replaceChildren();
 
   if (!q) return;
 
-  aggregate(gradeData())
-    .filter(s => s.name.includes(q))
-    .forEach(s => {
-      const node = document.createElement('button');
-
-      node.className = 'suggestion';
-      node.textContent = s.name
-        + ' — ' + (s.grade || 'بدون صف');
-
-      node.onclick = () => showStudent(s.email);
-
-      $('sugg').appendChild(node);
-    });
+  aggregate(filtered()).filter(s=>s.name.includes(q)).forEach(s=>{
+    const node=document.createElement('button');
+    node.className='suggestion';
+    node.textContent=s.name+' — '+(s.grade||'بدون صف');
+    node.onclick=()=>showStudent(s.email);
+    $('sugg').appendChild(node);
+  });
 }
 
 function showStudent(email) {
-  const allRecords = chronological(
-    gradeData().filter(a => a.email === email)
+  const allRecords=chronological(
+    gradeData().filter(a=>a.email===email)
   );
 
-  if (!allRecords.length) return;
-
-  const chosen = $('fWeek').value;
-
-  const range = allRecords.filter(a =>
-    chosen === 'all' || a.week === chosen
+  const records=chronological(
+    filtered().filter(a=>a.email===email)
   );
 
-  const records = range.length ? range : allRecords;
-  const s = aggregate(records)[0];
+  if (!records.length) return;
 
-  selectedEmail = email;
+  const s=aggregate(records)[0];
+  selectedEmail=email;
 
   $('studentSection').classList.remove('hidden');
   $('attemptsSection').classList.add('hidden');
 
-  const fields = [
-    ['الاسم', s.name],
-    ['الصف', s.grade || '-'],
-    ['المحاولات', s.count],
-    ['المتوسط', s.avg.toFixed(2)],
-    ['الأعلى', s.max.toFixed(2)],
-    ['الأدنى', s.min.toFixed(2)],
-    [
-      'متوسط الوقت',
-      s.avgDuration === null
-        ? '-'
-        : (s.avgDuration / 60).toFixed(1) + ' دقيقة'
-    ],
-    ['بلا أخطاء', s.perfect],
-    ['ضعيفة', s.weak],
-    ['آخر درجة', s.last.score.toFixed(2)],
-    ['التاريخ', s.last.date.slice(0,10)],
-    ['وقت الإكمال', hour12(s.last.end)],
-    ['مدة آخر محاولة', durationText(s.last)]
+  const fields=[
+    ['الاسم',s.name],
+    ['الصف',s.grade||'-'],
+    ['المحاولات',s.count],
+    ['المتوسط',s.avg.toFixed(2)],
+    ['الأعلى',s.max.toFixed(2)],
+    ['الأدنى',s.min.toFixed(2)],
+    ['متوسط الوقت',s.avgDuration===null
+      ? '-':(s.avgDuration/60).toFixed(1)+' دقيقة'],
+    ['بلا أخطاء',s.perfect],
+    ['ضعيفة',s.weak],
+    ['آخر درجة',s.last.score.toFixed(2)],
+    ['التاريخ',s.last.date.slice(0,10)],
+    ['وقت الإكمال',hour12(s.last.end)],
+    ['مدة آخر محاولة',durationText(s.last)]
   ];
 
-  $('studentData').innerHTML = fields.map(([k,v]) =>
-    '<p><b>' + esc(k) + ':</b> ' + esc(v) + '</p>'
+  $('studentData').innerHTML=fields.map(([key,value])=>
+    '<p><b>'+esc(key)+':</b> '+esc(value)+'</p>'
   ).join('');
 
-  const pct = Math.round(s.avg / TOTAL * 100);
+  // النسبة حسب جميع المحاولات الواقعة ضمن الفلتر المختار.
+  const pct=Math.round(s.avg/TOTAL*100);
 
-  $('stPct').textContent = pct + '%';
+  $('stPct').textContent=pct+'%';
+  $('stBar').style.width=Math.min(100,Math.max(0,pct))+'%';
+  $('stResult').textContent=s.avg>=PASS?'متقن':'غير متقن';
+  $('stResult').className='badge'+(s.avg>=PASS?'':' fail');
 
-  $('stBar').style.width =
-    Math.min(100, Math.max(0,pct)) + '%';
+  const last=s.last;
+  const wrong=last.wrong_questions||[];
+  const unknown=last.unknown_count||0;
 
-  $('stResult').textContent =
-    s.avg >= PASS ? 'متقن' : 'غير متقن';
-
-  $('stResult').className =
-    'badge' + (s.avg >= PASS ? '' : ' fail');
+  $('lastAttemptInfo').textContent=
+    'آخر محاولة ضمن النطاق المختار: '+last.date
+    +' | الدرجة: '+last.score.toFixed(2)+' من '+TOTAL;
 
   $('stWrong').replaceChildren();
 
-  if (!s.last.wrong_questions.length) {
-    $('stWrong').textContent = 'لا توجد أخطاء';
-  } else {
-    s.last.wrong_questions.forEach(question => {
-      const box = document.createElement('div');
-      box.className = 'question';
-
-      const text = document.createElement('div');
-      text.className = 'question-text';
-      text.textContent = question;
-
-      box.appendChild(text);
-      $('stWrong').appendChild(box);
-    });
+  function message(text) {
+    const node=document.createElement('div');
+    node.className='message note';
+    node.textContent=text;
+    $('stWrong').appendChild(node);
   }
 
-  $('studentSection').querySelector('.pdf-head').textContent =
-    (
-      range.length
-        ? contextText()
-        : 'جميع محاولات الطالب | الصف: ' + s.grade
-    );
+  wrong.forEach(question=>{
+    const box=document.createElement('div');
+    box.className='question';
 
-  requestAnimationFrame(() => {
-    donut(
-      'chDonut',
-      [s.last.correct, s.last.wrong],
-      ['صحيحة','خاطئة'],
-      ['#4E7C4E','#A94442']
-    );
+    const text=document.createElement('div');
+    text.className='question-text';
+    text.textContent=question;
 
-    drawChart('chProgress', 'line', {
-      labels: allRecords.map((a,i) => 'اختبار ' + (i+1)),
-      datasets: [{
+    box.appendChild(text);
+    $('stWrong').appendChild(box);
+  });
+
+  if (!wrong.length) {
+    if (!last.question_count) {
+      message('تعذرت قراءة أعمدة الأسئلة ونقاطها.');
+    } else if (unknown>0) {
+      message(
+        'تعذرت قراءة نقاط بعض الأسئلة؛ '
+        +'لا يمكن تأكيد خلو المحاولة من الأخطاء.'
+      );
+    } else if (Math.abs(last.score-TOTAL)>0.000001) {
+      message(
+        'تنبيه: درجة المحاولة ناقصة، لكن لم تُستخرج أسئلة بنقاط صفر. '
+        +'راجع نقاط الأسئلة لهذه المحاولة في Excel.'
+      );
+    } else {
+      message('لا توجد أخطاء في آخر محاولة.');
+    }
+  } else if (unknown>0) {
+    message('أسئلة إضافية تعذرت قراءة نقاطها: '+unknown);
+  }
+
+  $('stUnknown').textContent=unknown
+    ? 'أسئلة لم يمكن تحديد نتيجتها من نقاطها: '+unknown:'';
+
+  $('studentSection').querySelector('.pdf-head').textContent=
+    contextText();
+
+  requestAnimationFrame(()=>{
+    donut('chDonut',[last.correct,last.wrong],
+      ['صحيحة','خاطئة'],['#4E7C4E','#A94442']);
+
+    drawChart('chProgress','line',{
+      labels:records.map((a,i)=>'اختبار '+(i+1)),
+      datasets:[{
         label:'الدرجة',
-        data:allRecords.map(a => a.score),
+        data:records.map(a=>a.score),
         borderColor:'#6B4F2E',
         backgroundColor:'rgba(201,166,107,.22)',
         pointBackgroundColor:'#C9A66B',
@@ -1427,48 +1206,32 @@ function showStudent(email) {
         tension:.25,
         fill:true
       }]
-    }, {
-      scales: {
-        x: {
-          offset:true,
-          ticks: {
-            maxRotation:0,
-            autoSkip:true
-          }
-        },
-        y: {
-          beginAtZero:true,
-          max:TOTAL
-        }
+    },{
+      scales:{
+        x:{offset:true,ticks:{maxRotation:0,autoSkip:true}},
+        y:{beginAtZero:true,max:TOTAL}
       }
     });
   });
 
   buildAttempts(allRecords);
-
-  $('studentSection').scrollIntoView({
-    behavior:'smooth'
-  });
+  $('studentSection').scrollIntoView({behavior:'smooth'});
 }
 
 function buildAttempts(records) {
-  const last = records.at(-1);
+  const last=records[records.length-1];
 
-  $('attTitle').textContent =
-    'جميع محاولات: ' + last.name;
+  $('attTitle').textContent='جميع محاولات: '+last.name;
+  $('attemptsSection').querySelector('.pdf-head').textContent=
+    'جميع الأسابيع | الصف: '+(last.grade||'-');
 
-  $('attemptsSection').querySelector('.pdf-head').textContent =
-    'جميع الأسابيع | الصف: ' + (last.grade || '-');
-
-  $('attBody').innerHTML = records.map((a,i) =>
-    '<tr>'
-    + '<td>' + (i+1) + '</td>'
-    + '<td>' + a.score.toFixed(2) + '</td>'
-    + '<td>' + esc(durationText(a)) + '</td>'
-    + '<td>' + esc(a.date.slice(0,10)) + '</td>'
-    + '<td>' + esc(hour12(a.end)) + '</td>'
-    + '<td>' + weekNumber(a.week) + '</td>'
-    + '</tr>'
+  $('attBody').innerHTML=records.map((a,i)=>
+    '<tr><td>'+(i+1)
+    +'</td><td>'+a.score.toFixed(2)
+    +'</td><td>'+esc(durationText(a))
+    +'</td><td>'+esc(a.date.slice(0,10))
+    +'</td><td>'+esc(hour12(a.end))
+    +'</td><td>'+esc(weekLabel(a.week))+'</td></tr>'
   ).join('');
 }
 
@@ -1478,54 +1241,37 @@ function toggleAttempts() {
   $('attemptsSection').classList.toggle('hidden');
 
   if (!$('attemptsSection').classList.contains('hidden')) {
-    $('attemptsSection').scrollIntoView({
-      behavior:'smooth'
-    });
+    $('attemptsSection').scrollIntoView({behavior:'smooth'});
   }
 }
 
 function modalRecords() {
-  return filtered().filter(a =>
-    modalType === 'perfect'
-      ? a.wrong === 0 && a.question_count > 0
-      : a.score < PASS
+  return filtered().filter(a=>
+    modalType==='perfect'?isPerfectAttempt(a):a.score<PASS
   );
 }
 
 function attemptsTable(records) {
   return '<table><thead><tr>'
-    + '<th>الاسم</th>'
-    + '<th>الصف</th>'
-    + '<th>الدرجة</th>'
-    + '<th>التاريخ</th>'
-    + '<th>وقت الإكمال</th>'
-    + '<th>الأسبوع</th>'
-    + '</tr></thead><tbody>'
-    + (
-      records.length
-        ? records.map(a =>
-            '<tr>'
-            + '<td>' + esc(a.name) + '</td>'
-            + '<td>' + esc(a.grade) + '</td>'
-            + '<td>' + a.score.toFixed(2) + '</td>'
-            + '<td>' + esc(a.date.slice(0,10)) + '</td>'
-            + '<td>' + esc(hour12(a.end)) + '</td>'
-            + '<td>' + weekNumber(a.week) + '</td>'
-            + '</tr>'
-          ).join('')
-        : '<tr><td colspan="6">لا توجد محاولات</td></tr>'
-    )
-    + '</tbody></table>';
+    +'<th>الاسم</th><th>الصف</th><th>الدرجة</th>'
+    +'<th>التاريخ</th><th>وقت الإكمال</th><th>الأسبوع</th>'
+    +'</tr></thead><tbody>'
+    +(records.length?records.map(a=>
+      '<tr><td>'+esc(a.name)
+      +'</td><td>'+esc(a.grade)
+      +'</td><td>'+a.score.toFixed(2)
+      +'</td><td>'+esc(a.date.slice(0,10))
+      +'</td><td>'+esc(hour12(a.end))
+      +'</td><td>'+esc(weekLabel(a.week))+'</td></tr>'
+    ).join(''):'<tr><td colspan="6">لا توجد محاولات</td></tr>')
+    +'</tbody></table>';
 }
 
 function openModal(type) {
-  modalType = type;
-
-  $('mTitle').textContent = type === 'perfect'
-    ? 'المحاولات بلا أخطاء'
-    : 'المحاولات الضعيفة';
-
-  $('mList').innerHTML = attemptsTable(modalRecords());
+  modalType=type;
+  $('mTitle').textContent=type==='perfect'
+    ? 'المحاولات بلا أخطاء':'المحاولات الضعيفة';
+  $('mList').innerHTML=attemptsTable(modalRecords());
   $('modal').classList.add('open');
 }
 
@@ -1534,66 +1280,54 @@ function closeModal() {
 }
 
 function printModal() {
-  $('mpTitle').textContent = $('mTitle').textContent;
-  $('mpContext').textContent = contextText();
-  $('mpTable').innerHTML = attemptsTable(modalRecords());
-
+  $('mpTitle').textContent=$('mTitle').textContent;
+  $('mpContext').textContent=contextText();
+  $('mpTable').innerHTML=attemptsTable(modalRecords());
   printReport('modal');
 }
 
 function prepareChartImages() {
-  Object.values(charts).forEach(chart => {
-    const canvas = chart.canvas;
-    const box = canvas.parentElement;
-
+  Object.values(charts).forEach(chart=>{
+    const box=chart.canvas.parentElement;
     if (!box.getClientRects().length) return;
 
-    const rect = box.getBoundingClientRect();
-
-    if (!rect.width || !rect.height) return;
+    const rect=box.getBoundingClientRect();
+    if (!rect.width||!rect.height) return;
 
     chart.stop();
-    chart.resize(
-      Math.round(rect.width),
-      Math.round(rect.height)
-    );
+    chart.resize(Math.round(rect.width),Math.round(rect.height));
     chart.update('none');
 
-    let image = box.querySelector('.chart-print-image');
+    let image=box.querySelector('.chart-print-image');
 
     if (!image) {
-      image = document.createElement('img');
-      image.className = 'chart-print-image';
-      image.alt = 'رسم بياني';
+      image=document.createElement('img');
+      image.className='chart-print-image';
+      image.alt='رسم بياني';
       box.appendChild(image);
     }
 
-    image.src = chart.toBase64Image();
+    image.src=chart.toBase64Image();
     box.classList.add('chart-print-ready');
   });
 }
 
 function resetPrint() {
-  printing = false;
+  printing=false;
 
   document.body.classList.remove(
-    'print-summary',
-    'print-section',
-    'print-student',
-    'print-attempts',
-    'print-modal'
+    'print-summary','print-section','print-student',
+    'print-attempts','print-modal'
   );
 
-  document.querySelectorAll('.print-target').forEach(el =>
-    el.classList.remove('print-target')
-  );
+  document.querySelectorAll('.print-target').forEach(el=>
+    el.classList.remove('print-target'));
 
-  document.querySelectorAll('.chart-print-ready').forEach(el =>
-    el.classList.remove('chart-print-ready')
-  );
+  document.querySelectorAll('.chart-print-ready').forEach(el=>
+    el.classList.remove('chart-print-ready'));
 
-  requestAnimationFrame(() => {
-    Object.values(charts).forEach(chart => {
+  requestAnimationFrame(()=>{
+    Object.values(charts).forEach(chart=>{
       if (chart.canvas.parentElement.getClientRects().length) {
         chart.resize();
         chart.update('none');
@@ -1602,216 +1336,73 @@ function resetPrint() {
   });
 }
 
-async function printReport(mode, targetId=null) {
+async function printReport(mode,targetId=null) {
   prepareChartImages();
 
-  const images = [
-    ...document.querySelectorAll('.chart-print-image')
-  ];
+  const images=[...document.querySelectorAll('.chart-print-image')];
 
-  await Promise.all(images.map(img =>
-    img.decode
-      ? img.decode().catch(() => {})
-      : Promise.resolve()
+  await Promise.all(images.map(img=>
+    img.decode?img.decode().catch(()=>{}):Promise.resolve()
   ));
 
-  printing = true;
+  printing=true;
 
   document.body.classList.remove(
-    'print-summary',
-    'print-section',
-    'print-student',
-    'print-attempts',
-    'print-modal'
+    'print-summary','print-section','print-student',
+    'print-attempts','print-modal'
   );
 
-  document.querySelectorAll('.print-target').forEach(el =>
-    el.classList.remove('print-target')
-  );
+  document.querySelectorAll('.print-target').forEach(el=>
+    el.classList.remove('print-target'));
 
-  if (targetId) {
-    $(targetId).classList.add('print-target');
-  }
+  if (targetId) $(targetId).classList.add('print-target');
 
-  document.body.classList.add('print-' + mode);
+  document.body.classList.add('print-'+mode);
 
-  requestAnimationFrame(() =>
-    requestAnimationFrame(() => window.print())
+  requestAnimationFrame(()=>
+    requestAnimationFrame(()=>window.print())
   );
 }
 
-window.addEventListener('beforeprint', () => {
+window.addEventListener('beforeprint',()=>{
   if (!printing) prepareChartImages();
+  printing=true;
 });
 
-window.addEventListener('afterprint', resetPrint);
+window.addEventListener('afterprint',resetPrint);
 
-window.onerror = function(message) {
-  $('errbar').style.display = 'block';
-  $('errbar').textContent = 'خطأ في الصفحة: ' + message;
+window.onerror=function(message) {
+  $('errbar').style.display='block';
+  $('errbar').textContent='خطأ في الصفحة: '+message;
 };
 
 function init() {
-  const grades = [
-    ...new Set(ALL.map(a => a.grade).filter(Boolean))
+  const grades=[
+    ...new Set(ALL.map(a=>a.grade).filter(Boolean))
   ].sort();
 
-  $('fGrade').innerHTML =
-    '<option value="all">الكل</option>'
-    + grades.map(g =>
-      '<option value="' + esc(g) + '">' + esc(g) + '</option>'
+  $('fGrade').innerHTML='<option value="all">الكل</option>'
+    +grades.map(g=>
+      '<option value="'+esc(g)+'">'+esc(g)+'</option>'
     ).join('');
 
-  $('fWeek').innerHTML =
-    '<option value="all">الكل</option>'
-    + allWeeks().map((w,i) =>
-      '<option value="' + w + '">الأسبوع ' + (i+1) + '</option>'
-    ).join('');
-
+  fillWeeks();
   render();
 }
-
-
-/* تقويم المشروع: الأحد 1 نوفمبر 2026 هو الأسبوع الأول. */
-const PROJECT_START_KEY = "2026-11-01";
-const PROJECT_DAY_MS = 86400000;
-const PROJECT_WEEK_MS = 7 * PROJECT_DAY_MS;
-
-function projectDateValue(key) {
-  const parts = key.split("-").map(Number);
-  return Date.UTC(parts[0], parts[1] - 1, parts[2]);
-}
-
-function projectDateKey(value) {
-  return new Date(value).toISOString().slice(0, 10);
-}
-
-function projectTodayValue() {
-  const now = new Date();
-
-  // تاريخ اليوم المحلي، دون تأثير ساعة اليوم أو التوقيت الصيفي.
-  return Date.UTC(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate()
-  );
-}
-
-function projectCurrentWeekIndex() {
-  return Math.max(
-    0,
-    Math.floor(
-      (
-        projectTodayValue()
-        - projectDateValue(PROJECT_START_KEY)
-      ) / PROJECT_WEEK_MS
-    )
-  );
-}
-
-allWeeks = function() {
-  const first = projectDateValue(PROJECT_START_KEY);
-  const currentIndex = projectCurrentWeekIndex();
-  const weeks = [];
-
-  for (let index = 0; index <= currentIndex; index++) {
-    weeks.push(
-      projectDateKey(first + index * PROJECT_WEEK_MS)
-    );
-  }
-
-  return weeks;
-};
-
-weekNumber = function(week) {
-  const difference =
-    projectDateValue(week)
-    - projectDateValue(PROJECT_START_KEY);
-
-  return Math.floor(difference / PROJECT_WEEK_MS) + 1;
-};
-
-currentWeeks = function() {
-  const selected = $("fWeek").value;
-  const weeks = allWeeks();
-
-  const current = selected === "all"
-    ? weeks[weeks.length - 1]
-    : selected;
-
-  const currentValue = projectDateValue(current);
-  const firstValue = projectDateValue(PROJECT_START_KEY);
-
-  return {
-    current: current,
-    previous: currentValue > firstValue
-      ? projectDateKey(currentValue - PROJECT_WEEK_MS)
-      : null
-  };
-};
-
-/* إضافة الفترة إلى عنوان الأسبوع، مع إبقاء قيمة الخيار
-   تاريخ بداية الأسبوع حتى تبقى الحسابات متوافقة. */
-const originalProjectInit = init;
-
-init = function() {
-  originalProjectInit();
-
-  const first = projectDateValue(PROJECT_START_KEY);
-
-  Array.from($("fWeek").options).forEach(option => {
-    if (option.value === "all") return;
-
-    const startValue = projectDateValue(option.value);
-    const endValue = startValue + 6 * PROJECT_DAY_MS;
-    const number = Math.floor(
-      (startValue - first) / PROJECT_WEEK_MS
-    ) + 1;
-
-    option.textContent =
-      "الأسبوع " + number
-      + " — " + projectDateKey(startValue)
-      + " إلى " + projectDateKey(endValue);
-  });
-};
-
-/* تحديث قائمة الأسابيع إذا بقيت الصفحة مفتوحة
-   وعبرنا إلى أسبوع جديد. */
-let projectKnownWeekIndex = projectCurrentWeekIndex();
-
-setInterval(function() {
-  const currentIndex = projectCurrentWeekIndex();
-
-  if (currentIndex === projectKnownWeekIndex) return;
-
-  projectKnownWeekIndex = currentIndex;
-
-  const selectedWeek = $("fWeek").value;
-  const weeks = allWeeks();
-
-  $("fWeek").innerHTML =
-    '<option value="all">الكل</option>'
-    + weeks.map(function(week) {
-      const startValue = projectDateValue(week);
-      const endKey = projectDateKey(
-        startValue + 6 * PROJECT_DAY_MS
-      );
-
-      return '<option value="' + week + '">'
-        + "الأسبوع " + weekNumber(week)
-        + " — " + week + " إلى " + endKey
-        + "</option>";
-    }).join("");
-
-  $("fWeek").value = (
-    selectedWeek === "all"
-    || weeks.includes(selectedWeek)
-  ) ? selectedWeek : "all";
-
-  render();
-}, 60000);
 
 init();
+
+let knownWeek=todayWeek();
+
+setInterval(()=>{
+  const current=todayWeek();
+
+  if (current!==knownWeek) {
+    knownWeek=current;
+    fillWeeks();
+    render();
+  }
+},60000);
 </script>
 </body>
 </html>
