@@ -122,6 +122,10 @@ select{max-width:100%}
 .kpi b{display:block;font-size:23px}
 .kpi span{font-size:11px}
 .click{cursor:pointer}
+.click:focus-visible{
+  outline:2px solid var(--brown);
+  outline-offset:3px;
+}
 .green{color:var(--green)}
 .red{color:var(--red)}
 .grid2{
@@ -287,6 +291,7 @@ th{background:#eee2d0}
 thead{display:table-header-group}
 tr{break-inside:avoid}
 .table-wrap{overflow:auto}
+.participants-table{min-width:640px}
 .hidden{display:none!important}
 .pdf-head{display:none}
 .modal{
@@ -305,7 +310,7 @@ tr{break-inside:avoid}
   border:1px solid var(--accent);
   border-radius:15px;
   width:100%;
-  max-width:800px;
+  max-width:950px;
   max-height:85vh;
   overflow:auto;
   padding:18px;
@@ -394,6 +399,7 @@ tr{break-inside:avoid}
   body.print-modal .header,body.print-modal .container{display:none!important}
   body.print-modal #printModalReport{display:block}
   .table-wrap{overflow:visible}
+  .participants-table{min-width:0}
 }
 </style>
 </head>
@@ -415,30 +421,61 @@ tr{break-inside:avoid}
 <main class="container">
 <section id="secSummary">
   <div class="pdf-head"></div>
+
   <div class="filters">
     <label for="fGrade">الصف:</label>
     <select id="fGrade" onchange="render()"></select>
     <label for="fWeek">الأسبوع:</label>
     <select id="fWeek" onchange="render()"></select>
   </div>
+
   <div class="kpis">
-    <div class="kpi"><b id="kStudents">0</b><span>عدد الطلاب</span></div>
-    <div class="kpi"><b id="kAttempts">0</b><span>عدد المحاولات</span></div>
-    <div class="kpi"><b id="kAvg">0</b><span>متوسط الدرجة</span></div>
-    <div class="kpi"><b id="kTop">0</b><span>أعلى درجة</span></div>
-    <div class="kpi green click" onclick="openModal('perfect')">
-      <b id="kPerfect">0</b><span>محاولات بلا أخطاء</span>
+    <div
+      class="kpi click"
+      role="button"
+      tabindex="0"
+      aria-label="عرض الطلاب المشاركين"
+      onclick="openModal('students')"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('students');}"
+    >
+      <b id="kStudents">0</b>
+      <span>عدد الطلاب</span>
     </div>
+
+    <div class="kpi">
+      <b id="kAttempts">0</b>
+      <span>عدد المحاولات</span>
+    </div>
+
+    <div class="kpi">
+      <b id="kAvg">0</b>
+      <span>متوسط الدرجة</span>
+    </div>
+
+    <div class="kpi">
+      <b id="kTop">0</b>
+      <span>أعلى درجة</span>
+    </div>
+
+    <div class="kpi green click" onclick="openModal('perfect')">
+      <b id="kPerfect">0</b>
+      <span>محاولات بلا أخطاء</span>
+    </div>
+
     <div class="kpi red click" onclick="openModal('weak')">
-      <b id="kWeak">0</b><span>محاولات ضعيفة</span>
+      <b id="kWeak">0</b>
+      <span>محاولات ضعيفة</span>
     </div>
   </div>
+
   <div class="section-title">نتائج جميع الطلاب</div>
+
   <div class="grid2">
     <div class="card">
       <h3>الإجابات الصحيحة والخاطئة</h3>
       <div class="chart-box"><canvas id="chOverall"></canvas></div>
     </div>
+
     <div class="card">
       <h3>المحاولات بلا أخطاء والمحاولات الضعيفة</h3>
       <div class="chart-box"><canvas id="chQuality"></canvas></div>
@@ -503,15 +540,18 @@ tr{break-inside:avoid}
 <section id="studentSection" class="hidden">
   <div class="pdf-head"></div>
   <div class="section-title">ملخص الطالب</div>
+
   <div class="card">
     <h3>بيانات الطالب</h3>
     <div id="studentData" class="sdata-h"></div>
   </div>
+
   <div class="card">
     <h3>الأسئلة الخاطئة في آخر محاولة</h3>
     <div id="lastAttemptInfo" class="note"></div>
     <div id="stWrong" class="wrong"></div>
   </div>
+
   <div class="grid2">
     <div class="card">
       <h3>نسبة الإتقان — حسب الأسابيع المختارة</h3>
@@ -522,16 +562,19 @@ tr{break-inside:avoid}
       <div class="progress"><i id="stBar"></i></div>
       <div class="center"><span id="stResult" class="badge"></span></div>
     </div>
+
     <div class="card">
       <h3>الصحيح مقابل الخطأ — آخر محاولة</h3>
       <div class="chart-box"><canvas id="chDonut"></canvas></div>
       <div id="stUnknown" class="note"></div>
     </div>
   </div>
+
   <div class="card">
     <h3>منحنى تطور الدرجات</h3>
     <div class="chart-box line-box"><canvas id="chProgress"></canvas></div>
   </div>
+
   <div class="actions">
     <button class="btn" onclick="toggleAttempts()">إظهار جميع المحاولات</button>
     <button class="btn" onclick="printReport('student')">طباعة لوحة الطالب PDF</button>
@@ -541,15 +584,21 @@ tr{break-inside:avoid}
 <section id="attemptsSection" class="hidden">
   <div class="pdf-head"></div>
   <div id="attTitle" class="section-title">جميع المحاولات</div>
+
   <div class="card">
     <div class="actions">
       <button class="btn" onclick="printReport('attempts')">طباعة المحاولات PDF</button>
     </div>
+
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th>المحاولة</th><th>الدرجة</th><th>المدة</th>
-          <th>التاريخ</th><th>وقت الإكمال</th><th>الأسبوع</th>
+          <th>المحاولة</th>
+          <th>الدرجة</th>
+          <th>المدة</th>
+          <th>التاريخ</th>
+          <th>وقت الإكمال</th>
+          <th>الأسبوع</th>
         </tr></thead>
         <tbody id="attBody"></tbody>
       </table>
@@ -559,11 +608,11 @@ tr{break-inside:avoid}
 </main>
 
 <div id="modal" class="modal">
-  <div class="mbox">
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <h3 id="mTitle"></h3>
     <div id="mList" class="table-wrap"></div>
     <div class="actions">
-      <button class="btn" onclick="printModal()">PDF</button>
+      <button class="btn" onclick="printModal()">طباعة PDF</button>
       <button class="btn" onclick="closeModal()">إغلاق</button>
     </div>
   </div>
@@ -590,6 +639,10 @@ const WEEK_MS = 7 * 86400000;
 const $ = id => document.getElementById(id);
 const charts = {};
 const beltFrames = {};
+const arabicSort = new Intl.Collator('ar', {
+  sensitivity:'base',
+  numeric:true
+});
 
 let selectedEmail = null;
 let modalType = 'perfect';
@@ -614,16 +667,21 @@ function dateKey(value) {
 
 function todayWeek() {
   const now = new Date();
+
   const today = Date.UTC(
-    now.getFullYear(),now.getMonth(),now.getDate()
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
   );
+
   const first = dateValue(PROJECT_START_KEY);
   const index = Math.max(0,Math.floor((today-first)/WEEK_MS));
+
   return dateKey(first+index*WEEK_MS);
 }
 
 function allWeeks() {
-  const weeks = new Set(ALL.map(a => a.week));
+  const weeks = new Set(ALL.map(a=>a.week));
   const first = dateValue(PROJECT_START_KEY);
   const last = dateValue(todayWeek());
 
@@ -642,7 +700,8 @@ function weekNumber(week) {
 
 function weekLabel(week) {
   const value = dateValue(week);
-  const name = value < dateValue(PROJECT_START_KEY)
+
+  const name = value<dateValue(PROJECT_START_KEY)
     ? 'قبل بداية المشروع'
     : 'الأسبوع '+weekNumber(week);
 
@@ -650,26 +709,29 @@ function weekLabel(week) {
 }
 
 function fillWeeks() {
-  const selected = $('fWeek').value || 'all';
+  const selected = $('fWeek').value||'all';
 
-  $('fWeek').innerHTML = '<option value="all">الكل</option>'
-    + allWeeks().map(week =>
-      '<option value="'+week+'">'+esc(weekLabel(week))+'</option>'
+  $('fWeek').innerHTML =
+    '<option value="all">الكل</option>'
+    +allWeeks().map(week=>
+      '<option value="'+week+'">'
+      +esc(weekLabel(week))
+      +'</option>'
     ).join('');
 
-  if ([...$('fWeek').options].some(o => o.value===selected)) {
+  if ([...$('fWeek').options].some(o=>o.value===selected)) {
     $('fWeek').value = selected;
   }
 }
 
 function gradeData() {
   const grade = $('fGrade').value;
-  return ALL.filter(a => grade==='all'||a.grade===grade);
+  return ALL.filter(a=>grade==='all'||a.grade===grade);
 }
 
 function filtered() {
   const week = $('fWeek').value;
-  return gradeData().filter(a => week==='all'||a.week===week);
+  return gradeData().filter(a=>week==='all'||a.week===week);
 }
 
 function contextText() {
@@ -677,7 +739,8 @@ function contextText() {
   const grade = $('fGrade').value;
 
   return (week==='all'?'جميع الأسابيع':weekLabel(week))
-    +' | الصف: '+(grade==='all'?'جميع الصفوف':grade);
+    +' | الصف: '
+    +(grade==='all'?'جميع الصفوف':grade);
 }
 
 function currentWeeks() {
@@ -693,46 +756,58 @@ function currentWeeks() {
 
 function hour12(value) {
   if (!value||!value.includes(' ')) return '-';
+
   const time = value.split(' ')[1].split(':');
   const h = Number(time[0]);
-  return (h%12||12)+':'+time[1]+(h<12?' صباحاً':' مساءً');
+
+  return (h%12||12)+':'+time[1]
+    +(h<12?' صباحاً':' مساءً');
 }
 
 function durationText(a) {
   if (a.duration_seconds==null) return '-';
+
   const seconds = Math.round(a.duration_seconds);
+
   return Math.floor(seconds/60)+' د '+(seconds%60)+' ث';
 }
 
 function chronological(records) {
-  return records.slice().sort((a,b) =>
+  return records.slice().sort((a,b)=>
     a.date.localeCompare(b.date)||a.row-b.row
   );
 }
 
 function isPerfectAttempt(a) {
-  return a.question_count>0
-    && a.wrong===0
-    && (a.unknown_count||0)===0
-    && Math.abs(a.score-TOTAL)<0.000001;
+  return (
+    a.question_count>0
+    &&a.wrong===0
+    &&(a.unknown_count||0)===0
+    &&Math.abs(a.score-TOTAL)<0.000001
+  );
 }
 
 function aggregate(records) {
   const groups = new Map();
 
-  records.forEach(a => {
+  records.forEach(a=>{
     if (!groups.has(a.email)) groups.set(a.email,[]);
     groups.get(a.email).push(a);
   });
 
-  return [...groups.entries()].map(([email,rows]) => {
+  return [...groups.entries()].map(([email,rows])=>{
     const recs = chronological(rows);
     const last = recs[recs.length-1];
-    const scores = recs.map(a => a.score);
-    const durations = recs.filter(a => a.duration_seconds!=null);
+    const scores = recs.map(a=>a.score);
+
+    const durations = recs.filter(a=>
+      a.duration_seconds!=null
+    );
 
     return {
-      email,recs,last,
+      email,
+      recs,
+      last,
       name:last.name,
       grade:last.grade,
       count:recs.length,
@@ -742,8 +817,9 @@ function aggregate(records) {
       perfect:recs.filter(isPerfectAttempt).length,
       weak:recs.filter(a=>a.score<PASS).length,
       avgDuration:durations.length
-        ? durations.reduce((sum,a)=>sum+a.duration_seconds,0)
-          /durations.length
+        ? durations.reduce((sum,a)=>
+            sum+a.duration_seconds,0
+          )/durations.length
         : null
     };
   });
@@ -766,10 +842,14 @@ function topStudents() {
   function fullIn(week) {
     const result = new Map();
 
-    data.filter(a =>
-      a.week===week&&Math.abs(a.score-TOTAL)<0.000001
-    ).forEach(a => {
-      if (!result.has(a.email)||byTime(a,result.get(a.email))<0) {
+    data.filter(a=>
+      a.week===week
+      &&Math.abs(a.score-TOTAL)<0.000001
+    ).forEach(a=>{
+      if (
+        !result.has(a.email)
+        ||byTime(a,result.get(a.email))<0
+      ) {
         result.set(a.email,a);
       }
     });
@@ -782,24 +862,28 @@ function topStudents() {
   if ($('fWeek').value!=='all') {
     const groups = new Map();
 
-    [...cur.values()].forEach(a => {
+    [...cur.values()].forEach(a=>{
       if (!groups.has(a.grade)) groups.set(a.grade,[]);
       groups.get(a.grade).push(a);
     });
 
     return [...groups.values()]
-      .flatMap(rows=>rows.sort(byTime).slice(0,TOP_LIMIT))
-      .sort(byTime);
+      .flatMap(rows=>
+        rows.sort(byTime).slice(0,TOP_LIMIT)
+      ).sort(byTime);
   }
 
-  if (!previous) return [...cur.values()].sort(byTime);
+  if (!previous) {
+    return [...cur.values()].sort(byTime);
+  }
 
   const prev = fullIn(previous);
 
   return [...cur.entries()]
     .filter(([email])=>prev.has(email))
     .map(([email,a])=>
-      byTime(a,prev.get(email))<=0?a:prev.get(email)
+      byTime(a,prev.get(email))<=0
+        ?a:prev.get(email)
     ).sort(byTime);
 }
 
@@ -809,14 +893,15 @@ function trends() {
 
   if (!previous) return {up,down};
 
-  const cur=new Map(),prev=new Map();
+  const cur = new Map();
+  const prev = new Map();
 
-  chronological(gradeData()).forEach(a => {
+  chronological(gradeData()).forEach(a=>{
     if (a.week===current) cur.set(a.email,a);
     if (a.week===previous) prev.set(a.email,a);
   });
 
-  cur.forEach((a,email) => {
+  cur.forEach((a,email)=>{
     if (!prev.has(email)) return;
 
     const old = prev.get(email);
@@ -825,20 +910,26 @@ function trends() {
     if (difference===0) return;
 
     const change = old.score===0
-      ? null : difference/old.score*100;
+      ?null:difference/old.score*100;
 
     const item = {
-      ...a,change,
+      ...a,
+      change,
       label:change===null
-        ? 'تحسن من صفر'
-        : Math.abs(change).toFixed(1).replace(/\.0$/,'')+'%'
+        ?'تحسن من صفر'
+        :Math.abs(change).toFixed(1).replace(/\.0$/,'')+'%'
     };
 
     (difference>0?up:down).push(item);
   });
 
-  up.sort((a,b)=>(b.change??Infinity)-(a.change??Infinity));
-  down.sort((a,b)=>(a.change??0)-(b.change??0));
+  up.sort((a,b)=>
+    (b.change??Infinity)-(a.change??Infinity)
+  );
+
+  down.sort((a,b)=>
+    (a.change??0)-(b.change??0)
+  );
 
   return {up,down};
 }
@@ -850,10 +941,12 @@ function followStudents() {
 
   const current = dateValue(todayWeek());
 
-  return aggregate(gradeData().filter(a => {
-    const value = dateValue(a.week);
-    return value<=current&&value>=current-2*WEEK_MS;
-  })).filter(s=>s.max<PASS);
+  return aggregate(
+    gradeData().filter(a=>{
+      const value = dateValue(a.week);
+      return value<=current&&value>=current-2*WEEK_MS;
+    })
+  ).filter(s=>s.max<PASS);
 }
 
 function pill(a,trophy=false,extra='') {
@@ -864,9 +957,11 @@ function pill(a,trophy=false,extra='') {
     (trophy?'<span class="trophy">🏆</span>':'')
     +extra
     +'<div class="pill-name">'+esc(a.name)+'</div>'
-    +'<div class="pill-grade">'+esc(a.grade||'بدون صف')+'</div>';
+    +'<div class="pill-grade">'
+    +esc(a.grade||'بدون صف')+'</div>';
 
   node.onclick = ()=>showStudent(a.email);
+
   return node;
 }
 
@@ -894,16 +989,19 @@ function buildBelt(id,items,builder) {
 
   items.forEach(item=>inner.appendChild(builder(item)));
 
-  let offset=0;
-  let last=performance.now();
-  let paused=false;
+  let offset = 0;
+  let last = performance.now();
+  let paused = false;
 
   const mouseHover = window.matchMedia(
     '(any-hover: hover) and (any-pointer: fine)'
   );
 
   function enter(event) {
-    if (event.pointerType==='mouse'&&mouseHover.matches) {
+    if (
+      event.pointerType==='mouse'
+      &&mouseHover.matches
+    ) {
       paused=true;
     }
   }
@@ -935,24 +1033,32 @@ function buildBelt(id,items,builder) {
   };
 
   function step(now) {
-    const dt=Math.min((now-last)/1000,.05);
+    const dt = Math.min((now-last)/1000,.05);
     last=now;
 
-    if (!paused&&!printing&&inner.scrollWidth>outer.clientWidth) {
+    if (
+      !paused&&!printing
+      &&inner.scrollWidth>outer.clientWidth
+    ) {
       offset+=45*dt;
 
-      const first=inner.firstElementChild;
+      const first = inner.firstElementChild;
 
       if (first) {
-        const gap=parseFloat(getComputedStyle(inner).columnGap)||10;
-        const width=first.getBoundingClientRect().width+gap;
+        const gap = parseFloat(
+          getComputedStyle(inner).columnGap
+        )||10;
+
+        const width =
+          first.getBoundingClientRect().width+gap;
 
         if (width>0&&offset>=width) {
           offset-=width;
           inner.appendChild(first);
         }
 
-        inner.style.transform='translateX('+offset+'px)';
+        inner.style.transform =
+          'translateX('+offset+'px)';
       }
     }
 
@@ -967,13 +1073,16 @@ function drawChart(id,type,data,extra={}) {
 
   if (charts[id]) charts[id].destroy();
 
-  charts[id]=new Chart($(id),{
-    type,data,
+  charts[id] = new Chart($(id),{
+    type,
+    data,
     options:{
       responsive:true,
       maintainAspectRatio:false,
       animation:false,
-      layout:{padding:{left:12,right:12,top:8,bottom:4}},
+      layout:{
+        padding:{left:12,right:12,top:8,bottom:4}
+      },
       plugins:{
         legend:{
           display:type!=='line',
@@ -1013,52 +1122,64 @@ function render() {
 
   $('weekInfo').textContent=contextText();
 
-  const data=filtered();
-  const students=aggregate(data);
-  const scores=data.map(a=>a.score);
-  const perfect=data.filter(isPerfectAttempt);
-  const weak=data.filter(a=>a.score<PASS);
+  const data = filtered();
+  const students = aggregate(data);
+  const scores = data.map(a=>a.score);
+  const perfect = data.filter(isPerfectAttempt);
+  const weak = data.filter(a=>a.score<PASS);
 
   $('kStudents').textContent=students.length;
   $('kAttempts').textContent=data.length;
+
   $('kAvg').textContent=scores.length
-    ? (scores.reduce((sum,x)=>sum+x,0)/scores.length).toFixed(2)
-    : '0';
+    ?(scores.reduce((sum,x)=>sum+x,0)/scores.length).toFixed(2)
+    :'0';
+
   $('kTop').textContent=scores.length
-    ? Math.max(...scores).toFixed(2):'0';
+    ?Math.max(...scores).toFixed(2):'0';
+
   $('kPerfect').textContent=perfect.length;
   $('kWeak').textContent=weak.length;
 
   buildBelt('beltTop',topStudents(),a=>pill(a,true));
 
-  buildBelt('beltAll',students.sort((a,b)=>b.avg-a.avg),s=>{
-    const node=document.createElement('div');
-    node.className='scard';
+  buildBelt(
+    'beltAll',
+    students.sort((a,b)=>b.avg-a.avg),
+    s=>{
+      const node = document.createElement('div');
+      node.className='scard';
 
-    const pct=Math.round(s.avg/TOTAL*100);
-    const displayPct=Math.min(100,Math.max(0,pct));
+      const pct = Math.round(s.avg/TOTAL*100);
+      const displayPct = Math.min(100,Math.max(0,pct));
 
-    node.innerHTML=
-      '<div class="ring" style="--p:'+displayPct+'%">'
-      +'<span>'+pct+'%</span></div>'
-      +'<div class="pill-name">'+esc(s.name)+'</div>'
-      +'<div class="pill-grade">'+esc(s.grade)+'</div>'
-      +'<div class="smeta">المحاولات: '+s.count
-      +'<br>المتوسط: '+s.avg.toFixed(2)
-      +'<br>بلا أخطاء: '+s.perfect
-      +' — ضعيفة: '+s.weak+'</div>';
+      node.innerHTML =
+        '<div class="ring" style="--p:'+displayPct+'%">'
+        +'<span>'+pct+'%</span></div>'
+        +'<div class="pill-name">'+esc(s.name)+'</div>'
+        +'<div class="pill-grade">'+esc(s.grade)+'</div>'
+        +'<div class="smeta">المحاولات: '+s.count
+        +'<br>المتوسط: '+s.avg.toFixed(2)
+        +'<br>بلا أخطاء: '+s.perfect
+        +' — ضعيفة: '+s.weak+'</div>';
 
-    node.onclick=()=>showStudent(s.email);
-    return node;
-  });
+      node.onclick=()=>showStudent(s.email);
 
-  const t=trends();
+      return node;
+    }
+  );
+
+  const t = trends();
 
   buildBelt('beltUp',t.up,a=>pill(a,false,
-    '<div class="trend-number green">'+esc(a.label)+'</div>'));
+    '<div class="trend-number green">'
+    +esc(a.label)+'</div>'
+  ));
 
   buildBelt('beltDown',t.down,a=>pill(a,false,
-    '<div class="trend-number red">'+esc(a.label)+'</div>'));
+    '<div class="trend-number red">'
+    +esc(a.label)+'</div>'
+  ));
 
   buildBelt('beltFollow',followStudents(),a=>pill(a));
 
@@ -1067,45 +1188,52 @@ function render() {
     data.reduce((sum,a)=>sum+a.wrong,0)
   ],['صحيحة','خاطئة'],['#4E7C4E','#A94442']);
 
-  donut('chQuality',[perfect.length,weak.length],
-    ['بلا أخطاء','ضعيفة'],['#C9A66B','#A94442']);
+  donut(
+    'chQuality',
+    [perfect.length,weak.length],
+    ['بلا أخطاء','ضعيفة'],
+    ['#C9A66B','#A94442']
+  );
 
   doSearch();
 }
 
 function doSearch() {
-  const q=$('searchBox').value.trim();
+  const q = $('searchBox').value.trim();
   $('sugg').replaceChildren();
 
   if (!q) return;
 
-  aggregate(filtered()).filter(s=>s.name.includes(q)).forEach(s=>{
-    const node=document.createElement('button');
-    node.className='suggestion';
-    node.textContent=s.name+' — '+(s.grade||'بدون صف');
-    node.onclick=()=>showStudent(s.email);
-    $('sugg').appendChild(node);
-  });
+  aggregate(filtered())
+    .filter(s=>s.name.includes(q))
+    .sort((a,b)=>arabicSort.compare(a.name,b.name))
+    .forEach(s=>{
+      const node = document.createElement('button');
+      node.className='suggestion';
+      node.textContent=s.name+' — '+(s.grade||'بدون صف');
+      node.onclick=()=>showStudent(s.email);
+      $('sugg').appendChild(node);
+    });
 }
 
 function showStudent(email) {
-  const allRecords=chronological(
+  const allRecords = chronological(
     gradeData().filter(a=>a.email===email)
   );
 
-  const records=chronological(
+  const records = chronological(
     filtered().filter(a=>a.email===email)
   );
 
   if (!records.length) return;
 
-  const s=aggregate(records)[0];
+  const s = aggregate(records)[0];
   selectedEmail=email;
 
   $('studentSection').classList.remove('hidden');
   $('attemptsSection').classList.add('hidden');
 
-  const fields=[
+  const fields = [
     ['الاسم',s.name],
     ['الصف',s.grade||'-'],
     ['المحاولات',s.count],
@@ -1113,7 +1241,7 @@ function showStudent(email) {
     ['الأعلى',s.max.toFixed(2)],
     ['الأدنى',s.min.toFixed(2)],
     ['متوسط الوقت',s.avgDuration===null
-      ? '-':(s.avgDuration/60).toFixed(1)+' دقيقة'],
+      ?'-':(s.avgDuration/60).toFixed(1)+' دقيقة'],
     ['بلا أخطاء',s.perfect],
     ['ضعيفة',s.weak],
     ['آخر درجة',s.last.score.toFixed(2)],
@@ -1126,36 +1254,35 @@ function showStudent(email) {
     '<p><b>'+esc(key)+':</b> '+esc(value)+'</p>'
   ).join('');
 
-  // النسبة حسب جميع المحاولات الواقعة ضمن الفلتر المختار.
-  const pct=Math.round(s.avg/TOTAL*100);
+  const pct = Math.round(s.avg/TOTAL*100);
 
   $('stPct').textContent=pct+'%';
   $('stBar').style.width=Math.min(100,Math.max(0,pct))+'%';
   $('stResult').textContent=s.avg>=PASS?'متقن':'غير متقن';
   $('stResult').className='badge'+(s.avg>=PASS?'':' fail');
 
-  const last=s.last;
-  const wrong=last.wrong_questions||[];
-  const unknown=last.unknown_count||0;
+  const last = s.last;
+  const wrong = last.wrong_questions||[];
+  const unknown = last.unknown_count||0;
 
-  $('lastAttemptInfo').textContent=
+  $('lastAttemptInfo').textContent =
     'آخر محاولة ضمن النطاق المختار: '+last.date
     +' | الدرجة: '+last.score.toFixed(2)+' من '+TOTAL;
 
   $('stWrong').replaceChildren();
 
   function message(text) {
-    const node=document.createElement('div');
+    const node = document.createElement('div');
     node.className='message note';
     node.textContent=text;
     $('stWrong').appendChild(node);
   }
 
   wrong.forEach(question=>{
-    const box=document.createElement('div');
+    const box = document.createElement('div');
     box.className='question';
 
-    const text=document.createElement('div');
+    const text = document.createElement('div');
     text.className='question-text';
     text.textContent=question;
 
@@ -1173,7 +1300,8 @@ function showStudent(email) {
       );
     } else if (Math.abs(last.score-TOTAL)>0.000001) {
       message(
-        'تنبيه: درجة المحاولة ناقصة، لكن لم تُستخرج أسئلة بنقاط صفر. '
+        'تنبيه: درجة المحاولة ناقصة، '
+        +'لكن لم تُستخرج أسئلة بنقاط صفر. '
         +'راجع نقاط الأسئلة لهذه المحاولة في Excel.'
       );
     } else {
@@ -1184,14 +1312,19 @@ function showStudent(email) {
   }
 
   $('stUnknown').textContent=unknown
-    ? 'أسئلة لم يمكن تحديد نتيجتها من نقاطها: '+unknown:'';
+    ?'أسئلة لم يمكن تحديد نتيجتها من نقاطها: '+unknown
+    :'';
 
   $('studentSection').querySelector('.pdf-head').textContent=
     contextText();
 
   requestAnimationFrame(()=>{
-    donut('chDonut',[last.correct,last.wrong],
-      ['صحيحة','خاطئة'],['#4E7C4E','#A94442']);
+    donut(
+      'chDonut',
+      [last.correct,last.wrong],
+      ['صحيحة','خاطئة'],
+      ['#4E7C4E','#A94442']
+    );
 
     drawChart('chProgress','line',{
       labels:records.map((a,i)=>'اختبار '+(i+1)),
@@ -1208,7 +1341,10 @@ function showStudent(email) {
       }]
     },{
       scales:{
-        x:{offset:true,ticks:{maxRotation:0,autoSkip:true}},
+        x:{
+          offset:true,
+          ticks:{maxRotation:0,autoSkip:true}
+        },
         y:{beginAtZero:true,max:TOTAL}
       }
     });
@@ -1219,9 +1355,10 @@ function showStudent(email) {
 }
 
 function buildAttempts(records) {
-  const last=records[records.length-1];
+  const last = records[records.length-1];
 
   $('attTitle').textContent='جميع محاولات: '+last.name;
+
   $('attemptsSection').querySelector('.pdf-head').textContent=
     'جميع الأسابيع | الصف: '+(last.grade||'-');
 
@@ -1246,31 +1383,99 @@ function toggleAttempts() {
 }
 
 function modalRecords() {
-  return filtered().filter(a=>
-    modalType==='perfect'?isPerfectAttempt(a):a.score<PASS
+  const records = filtered();
+
+  if (modalType==='students') return records;
+
+  if (modalType==='perfect') {
+    return records.filter(isPerfectAttempt);
+  }
+
+  return records.filter(a=>a.score<PASS);
+}
+
+function participantsTable(records) {
+  const students = aggregate(records).sort((a,b)=>
+    arabicSort.compare(a.name,b.name)
+    ||arabicSort.compare(a.grade||'',b.grade||'')
+    ||a.email.localeCompare(b.email)
+  );
+
+  const rows = students.length
+    ?students.map((student,index)=>
+      '<tr>'
+      +'<td>'+(index+1)+'</td>'
+      +'<td>'+esc(student.name)+'</td>'
+      +'<td>'+esc(student.grade||'غير محدد')+'</td>'
+      +'<td>'+student.count+'</td>'
+      +'<td>'+student.perfect+'</td>'
+      +'<td>'+student.weak+'</td>'
+      +'<td>'+esc(student.last.date.slice(0,10))+'</td>'
+      +'</tr>'
+    ).join('')
+    :'<tr><td colspan="7">'
+      +'لا يوجد طلاب مشاركون ضمن الفلاتر المختارة'
+      +'</td></tr>';
+
+  return (
+    '<div class="note" style="margin-bottom:10px">'
+    +esc(contextText())
+    +' | عدد الطلاب المشاركين: '+students.length
+    +'</div>'
+    +'<table class="participants-table">'
+    +'<thead><tr>'
+    +'<th>م</th>'
+    +'<th>اسم الطالب</th>'
+    +'<th>الصف</th>'
+    +'<th>عدد المحاولات</th>'
+    +'<th>بلا أخطاء</th>'
+    +'<th>ضعيفة</th>'
+    +'<th>تاريخ آخر محاولة</th>'
+    +'</tr></thead>'
+    +'<tbody>'+rows+'</tbody>'
+    +'</table>'
   );
 }
 
 function attemptsTable(records) {
-  return '<table><thead><tr>'
-    +'<th>الاسم</th><th>الصف</th><th>الدرجة</th>'
-    +'<th>التاريخ</th><th>وقت الإكمال</th><th>الأسبوع</th>'
+  if (modalType==='students') {
+    return participantsTable(records);
+  }
+
+  return (
+    '<table><thead><tr>'
+    +'<th>الاسم</th>'
+    +'<th>الصف</th>'
+    +'<th>الدرجة</th>'
+    +'<th>التاريخ</th>'
+    +'<th>وقت الإكمال</th>'
+    +'<th>الأسبوع</th>'
     +'</tr></thead><tbody>'
-    +(records.length?records.map(a=>
-      '<tr><td>'+esc(a.name)
-      +'</td><td>'+esc(a.grade)
-      +'</td><td>'+a.score.toFixed(2)
-      +'</td><td>'+esc(a.date.slice(0,10))
-      +'</td><td>'+esc(hour12(a.end))
-      +'</td><td>'+esc(weekLabel(a.week))+'</td></tr>'
-    ).join(''):'<tr><td colspan="6">لا توجد محاولات</td></tr>')
-    +'</tbody></table>';
+    +(records.length
+      ?records.map(a=>
+        '<tr><td>'+esc(a.name)
+        +'</td><td>'+esc(a.grade)
+        +'</td><td>'+a.score.toFixed(2)
+        +'</td><td>'+esc(a.date.slice(0,10))
+        +'</td><td>'+esc(hour12(a.end))
+        +'</td><td>'+esc(weekLabel(a.week))+'</td></tr>'
+      ).join('')
+      :'<tr><td colspan="6">لا توجد محاولات</td></tr>'
+    )
+    +'</tbody></table>'
+  );
 }
 
 function openModal(type) {
   modalType=type;
-  $('mTitle').textContent=type==='perfect'
-    ? 'المحاولات بلا أخطاء':'المحاولات الضعيفة';
+
+  const titles = {
+    students:'الطلاب المشاركون خلال الفترة المختارة',
+    perfect:'المحاولات بلا أخطاء',
+    weak:'المحاولات الضعيفة'
+  };
+
+  $('mTitle').textContent=titles[type]||'النتائج';
   $('mList').innerHTML=attemptsTable(modalRecords());
   $('modal').classList.add('open');
 }
@@ -1283,22 +1488,28 @@ function printModal() {
   $('mpTitle').textContent=$('mTitle').textContent;
   $('mpContext').textContent=contextText();
   $('mpTable').innerHTML=attemptsTable(modalRecords());
+
   printReport('modal');
 }
 
 function prepareChartImages() {
   Object.values(charts).forEach(chart=>{
-    const box=chart.canvas.parentElement;
+    const box = chart.canvas.parentElement;
+
     if (!box.getClientRects().length) return;
 
-    const rect=box.getBoundingClientRect();
+    const rect = box.getBoundingClientRect();
+
     if (!rect.width||!rect.height) return;
 
     chart.stop();
-    chart.resize(Math.round(rect.width),Math.round(rect.height));
+    chart.resize(
+      Math.round(rect.width),
+      Math.round(rect.height)
+    );
     chart.update('none');
 
-    let image=box.querySelector('.chart-print-image');
+    let image = box.querySelector('.chart-print-image');
 
     if (!image) {
       image=document.createElement('img');
@@ -1316,15 +1527,20 @@ function resetPrint() {
   printing=false;
 
   document.body.classList.remove(
-    'print-summary','print-section','print-student',
-    'print-attempts','print-modal'
+    'print-summary',
+    'print-section',
+    'print-student',
+    'print-attempts',
+    'print-modal'
   );
 
   document.querySelectorAll('.print-target').forEach(el=>
-    el.classList.remove('print-target'));
+    el.classList.remove('print-target')
+  );
 
   document.querySelectorAll('.chart-print-ready').forEach(el=>
-    el.classList.remove('chart-print-ready'));
+    el.classList.remove('chart-print-ready')
+  );
 
   requestAnimationFrame(()=>{
     Object.values(charts).forEach(chart=>{
@@ -1339,21 +1555,29 @@ function resetPrint() {
 async function printReport(mode,targetId=null) {
   prepareChartImages();
 
-  const images=[...document.querySelectorAll('.chart-print-image')];
+  const images = [
+    ...document.querySelectorAll('.chart-print-image')
+  ];
 
   await Promise.all(images.map(img=>
-    img.decode?img.decode().catch(()=>{}):Promise.resolve()
+    img.decode
+      ?img.decode().catch(()=>{})
+      :Promise.resolve()
   ));
 
   printing=true;
 
   document.body.classList.remove(
-    'print-summary','print-section','print-student',
-    'print-attempts','print-modal'
+    'print-summary',
+    'print-section',
+    'print-student',
+    'print-attempts',
+    'print-modal'
   );
 
   document.querySelectorAll('.print-target').forEach(el=>
-    el.classList.remove('print-target'));
+    el.classList.remove('print-target')
+  );
 
   if (targetId) $(targetId).classList.add('print-target');
 
@@ -1371,17 +1595,26 @@ window.addEventListener('beforeprint',()=>{
 
 window.addEventListener('afterprint',resetPrint);
 
+window.addEventListener('keydown',event=>{
+  if (event.key==='Escape') closeModal();
+});
+
+$('modal').addEventListener('click',event=>{
+  if (event.target===$('modal')) closeModal();
+});
+
 window.onerror=function(message) {
   $('errbar').style.display='block';
   $('errbar').textContent='خطأ في الصفحة: '+message;
 };
 
 function init() {
-  const grades=[
+  const grades = [
     ...new Set(ALL.map(a=>a.grade).filter(Boolean))
-  ].sort();
+  ].sort((a,b)=>arabicSort.compare(a,b));
 
-  $('fGrade').innerHTML='<option value="all">الكل</option>'
+  $('fGrade').innerHTML =
+    '<option value="all">الكل</option>'
     +grades.map(g=>
       '<option value="'+esc(g)+'">'+esc(g)+'</option>'
     ).join('');
@@ -1392,10 +1625,10 @@ function init() {
 
 init();
 
-let knownWeek=todayWeek();
+let knownWeek = todayWeek();
 
 setInterval(()=>{
-  const current=todayWeek();
+  const current = todayWeek();
 
   if (current!==knownWeek) {
     knownWeek=current;
